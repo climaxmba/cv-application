@@ -1,5 +1,6 @@
 // import { useState } from 'react'
 import "./styles/App.css";
+import "./styles/Forms.css";
 import "./styles/utils.css";
 import Forms from "./compenents/Forms";
 import Display from "./compenents/Display";

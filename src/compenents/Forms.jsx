@@ -102,7 +102,7 @@ function WorkExpForm() {
 
 export default function Forms() {
   return (
-    <div>
+    <div id="forms-contr">
       <GeneralForm />
       <EducationForm />
       <SummaryForm />

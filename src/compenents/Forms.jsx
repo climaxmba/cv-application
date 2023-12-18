@@ -1,8 +1,17 @@
+function Form({ children, submitTxt="Save", onSubmit }) {
+  return (
+    <form onSubmit={onSubmit}>
+      {children}
+      <button type="submit">{submitTxt}</button>
+    </form>
+  );
+}
+
 function GeneralForm() {
   return (
     <section id="general-sectn">
       <h2>General Information</h2>
-      <form>
+      <Form>
         <div>
           <label htmlFor="person-name">Name:</label>
           <input type="text" name="person-name" id="person-name" />
@@ -17,7 +26,7 @@ function GeneralForm() {
           <label htmlFor="person-phone">Phone Number:</label>
           <input type="text" name="person-name" id="person-phone" />
         </div>
-      </form>
+      </Form>
     </section>
   );
 }
@@ -25,7 +34,7 @@ function GeneralForm() {
 function EducationForm() {
   <section id="edu-sectn">
     <h2>Education</h2>
-    <form>
+    <Form>
       <div>
         <label htmlFor="edu-name">School Name:</label>
         <input type="text" name="edu-name" id="edu-name" />
@@ -45,7 +54,7 @@ function EducationForm() {
         <label htmlFor="edu-edate">End Date:</label>
         <input type="date" name="edu-edate" id="edu-edate" />
       </div>
-    </form>
+    </Form>
   </section>;
 }
 
@@ -53,11 +62,11 @@ function SummaryForm() {
   return (
     <section id="summary-sectn">
       <h2>Summary</h2>
-      <form>
+      <Form>
         <div>
           <textarea name="summary" id="summary" cols="30" rows="10"></textarea>
         </div>
-      </form>
+      </Form>
     </section>
   );
 }
@@ -66,7 +75,7 @@ function WorkExpForm() {
   return (
     <section id="job-sectn">
       <h2>Work Experience</h2>
-      <form>
+      <Form>
         <div>
           <label htmlFor="job-comp">Company Name:</label>
           <input type="text" name="comp-name" id="job-comp" />
@@ -86,7 +95,7 @@ function WorkExpForm() {
           <label htmlFor="job-edate">End Date:</label>
           <input type="date" name="job-edate" id="job-edate" />
         </div>
-      </form>
+      </Form>
     </section>
   );
 }

@@ -1,0 +1,4 @@
+.panneled-div {
+    display: flex;
+    gap: 2rem;
+}

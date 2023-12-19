@@ -1,4 +1,11 @@
 .panneled-div {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.panneled-div > *:first-child {
+  flex-grow: 1 0 320px;
+}
+.panneled-div > *:last-child {
+  flex-grow: 2;
 }

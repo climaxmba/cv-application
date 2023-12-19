@@ -106,13 +106,28 @@ function ActiveForms({ children }) {
   return <div id="active-form-contr">{children}</div>;
 }
 
+function AddBtns({ text }) {
+  return <button type="button">{text}</button>;
+}
+
+function AddBtnsContr() {
+  return (
+    <div id="addbtns-contr">
+      <AddBtns text="Add Experience" />
+      <AddBtns text="Add Education" />
+      <AddBtns text="Add Socials" />
+    </div>
+  );
+}
+
 export default function Controls() {
   return (
-    <div id="forms-contr">
+    <div id="ctrls-contr">
       <ActiveForms>
         <GeneralForm />
         <EducationForm />
       </ActiveForms>
+      <AddBtnsContr />
     </div>
   );
 }

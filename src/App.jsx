@@ -1,8 +1,8 @@
 // import { useState } from 'react'
 import "./styles/App.css";
-import "./styles/Forms.css";
+import "./styles/Controls.css";
 import "./styles/utils.css";
-import Forms from "./compenents/Forms";
+import Controls from "./compenents/Controls";
 import Display from "./compenents/Display";
 import { PanneledDiv } from "./compenents/utils";
 
@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <PanneledDiv>
-        <Forms />
+        <Controls />
         <Display />
       </PanneledDiv>
     </>

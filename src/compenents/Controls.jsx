@@ -106,7 +106,7 @@ function ActiveForms({ children }) {
   return <div id="active-form-contr">{children}</div>;
 }
 
-export default function Forms() {
+export default function Controls() {
   return (
     <div id="forms-contr">
       <ActiveForms>

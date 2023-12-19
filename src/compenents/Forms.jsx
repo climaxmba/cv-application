@@ -1,4 +1,4 @@
-function Form({ children, submitTxt="Save", onSubmit }) {
+function Form({ children, submitTxt = "Save", onSubmit }) {
   return (
     <form onSubmit={onSubmit}>
       {children}
@@ -32,30 +32,32 @@ function GeneralForm() {
 }
 
 function EducationForm() {
-  <section id="edu-sectn">
-    <h2>Education</h2>
-    <Form>
-      <div>
-        <label htmlFor="edu-name">School Name:</label>
-        <input type="text" name="edu-name" id="edu-name" />
-      </div>
+  return (
+    <section id="edu-sectn">
+      <h2>Education</h2>
+      <Form>
+        <div>
+          <label htmlFor="edu-name">School Name:</label>
+          <input type="text" name="edu-name" id="edu-name" />
+        </div>
 
-      <div>
-        <label htmlFor="edu-prgm">Educational Program:</label>
-        <input type="text" name="edu-prgm" id="edu-prgm" />
-      </div>
+        <div>
+          <label htmlFor="edu-prgm">Educational Program:</label>
+          <input type="text" name="edu-prgm" id="edu-prgm" />
+        </div>
 
-      <div>
-        <label htmlFor="edu-sdate">Start Date:</label>
-        <input type="date" name="edu-sdate" id="edu-sdate" />
-      </div>
+        <div>
+          <label htmlFor="edu-sdate">Start Date:</label>
+          <input type="date" name="edu-sdate" id="edu-sdate" />
+        </div>
 
-      <div>
-        <label htmlFor="edu-edate">End Date:</label>
-        <input type="date" name="edu-edate" id="edu-edate" />
-      </div>
-    </Form>
-  </section>;
+        <div>
+          <label htmlFor="edu-edate">End Date:</label>
+          <input type="date" name="edu-edate" id="edu-edate" />
+        </div>
+      </Form>
+    </section>
+  );
 }
 
 function SummaryForm() {
@@ -100,13 +102,17 @@ function WorkExpForm() {
   );
 }
 
+function ActiveForms({ children }) {
+  return <div id="active-form-contr">{children}</div>;
+}
+
 export default function Forms() {
   return (
     <div id="forms-contr">
-      <GeneralForm />
-      <EducationForm />
-      <SummaryForm />
-      <WorkExpForm />
+      <ActiveForms>
+        <GeneralForm />
+        <EducationForm />
+      </ActiveForms>
     </div>
   );
 }

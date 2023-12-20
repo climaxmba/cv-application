@@ -38,13 +38,13 @@ const educationData = {
   id: 2,
   schools: [
     {
-      school: "Harvard",
+      schoolName: "Harvard",
       course: "BSc. Computer Engineering",
       startDate: "Feb 2005",
       endDate: "Sept 2012",
     },
     {
-      school: "Cousera",
+      schoolName: "Cousera",
       course: "Cloud Computing",
       startDate: "May 2019",
       endDate: "Sept 2019",
@@ -64,7 +64,7 @@ const experienceData = {
     },
     {
       title: "App Developer",
-      startDat: "Jan 2018",
+      startDate: "Jan 2018",
       endDate: "Dec 2019",
       company: "Netflix",
       jobDescription: "Job decsciption",
@@ -74,7 +74,7 @@ const experienceData = {
 
 const skillData = {
   id: 4,
-  skills: ["HTML", "CSS", "JaveScript"],
+  skills: ["HTML", "CSS", "JavaScript"],
 };
 
 const sectionsInfoData = [
@@ -88,11 +88,11 @@ const sectionsInfoData = [
   },
   {
     isVisible: true,
-    section: "education"
+    section: "experience"
   },
   {
     isVisible: true,
-    section: "experience"
+    section: "education"
   },
   {
     isVisible: true,

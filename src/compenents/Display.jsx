@@ -1,93 +1,69 @@
-function GeneralSectn() {
+function GeneralSectn({ general }) {
   return (
-    <section>
-      <h2 id="candidatename">Andrew Stone</h2>
-      <div id="contact-contr">
-        <a href="mailto:andrewstone@not-real-people.com">
-          <span className="icon"></span>
-          <span className="linktxt">andrewstone@not-real-people.com</span>
-        </a>
-        <a href="tel:555-555-555">
-          <span className="icon"></span>
-          <span className="linktxt">555-555-555</span>
-        </a>
-      </div>
-      <div id="social-conrtr">LinkedIn, Facebook, GitHub</div>
-    </section>
+    general.name && (
+      <section>
+        <h2 id="candidatename">{general.name}</h2>
+        <div id="contact-contr">
+          <a href={`mailto:${general.mail}`}>
+            <span className="icon"></span>
+            <span className="linktxt">{general.mail}</span>
+          </a>
+          <a>
+            <span className="icon"></span>
+            <span className="linktxt">{general.phone}</span>
+          </a>
+        </div>
+        <div id="social-conrtr">LinkedIn, Facebook, GitHub</div>
+      </section>
+    )
   );
 }
 
-function SummarySectn() {
+function SummarySectn({ summary }) {
   return (
-    <section>
-      <h2>Summary</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui modi
-        doloribus nobis veniam voluptas ex ipsa accusantium cum, magnam
-        similique omnis, quis nam laboriosam nesciunt veritatis at dolor?
-        Placeat, ex.
-      </p>
-    </section>
+    summary.text && (
+      <section>
+        <h2>Summary</h2>
+        <p>{summary.text}</p>
+      </section>
+    )
   );
 }
 
-function ExperienceSectn() {
+function ExperienceSectn({ experience }) {
   return (
     <section>
       <h2>Experience</h2>
 
-      <div className="exp-contrs">
-        <h3 className="jobtitle">Software Engineer</h3>
-        <div className="companyname">Meta</div>
-        <div className="date">Jan 2020 - Present</div>
-        <p className="jobdetails">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat ex
-          possimus velit, asperiores doloribus provident.
-        </p>
-      </div>
-
-      <div className="exp-contrs">
-        <h3 className="jobtitle">Add developer</h3>
-        <div className="companyname">Netflix</div>
-        <div className="date">Jan 2018 - Dec 2019</div>
-        <p className="jobdetails">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat ex
-          possimus velit, asperiores doloribus provident.
-        </p>
-      </div>
+      {experience.experiences.map((exp, i) => (
+        <div key={i} className="exp-contrs">
+          <h3 className="jobtitle">{exp.title}</h3>
+          <div className="companyname">{exp.company}</div>
+          <div className="date">{`${exp.startDate} - ${exp.endDate}`}</div>
+          <p className="jobdetails">{exp.jobDescription}</p>
+        </div>
+      ))}
     </section>
   );
 }
 
-function EducationSectn() {
+function EducationSectn({ education }) {
   return (
     <section>
       <h2>Education</h2>
       <div id="educations">
-        <div className="edu-contrs">
-          <h3 className="schoolname">Harvard</h3>
-          <div className="coursename">BSc. Computer Engineering</div>
-          <div className="date">Feb 2005 - 2012</div>
-        </div>
-
-        <div className="edu-contrs">
-          <h3 className="schoolname">Cousera</h3>
-          <div className="coursename">Cloud Computing</div>
-          <div className="date">May 2019 - Sept 2019</div>
-        </div>
+        {education.schools.map((school) => {
+          return (
+            <div key={school.schoolName} className="edu-contrs">
+              <h3 className="schoolname">{school.schoolName}</h3>
+              {school.course && (
+                <div className="coursename">{school.course}</div>
+              )}
+              <div className="date">{`${school.startDate} - ${school.endDate}`}</div>
+            </div>
+          );
+        })}
       </div>
-    </section>
-  );
-}
-
-function CustomSectn() {
-  return (
-    <section>
-      <h2>Custom Section</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
-        fugit!
-      </p>
     </section>
   );
 }
@@ -97,9 +73,9 @@ function SkillsSectn({ skill }) {
     <section>
       <h2>Skills</h2>
       <ul id="skill-list">
-        <li>HTML</li>
-        <li>JavaScript</li>
-        <li>CSS</li>
+        {skill.skills.map((skillElem) => (
+          <li key={skillElem}>{skillElem}</li>
+        ))}
       </ul>
     </section>
   );
@@ -123,11 +99,15 @@ export default function Display({
             case "summary":
               return <SummarySectn key={summary.id} summary={summary} />;
             case "education":
-              return <EducationSectn key={education.id} education={education} />;
+              return (
+                <EducationSectn key={education.id} education={education} />
+              );
             case "experience":
-              return <ExperienceSectn key={experience.id} experience={experience} />;
+              return (
+                <ExperienceSectn key={experience.id} experience={experience} />
+              );
             case "skills":
-              return <SkillsSectn key={skill.id} skill={skill} />;              <CustomSectn key={customSectns.id} customSectns={customSectns} />;
+              return <SkillsSectn key={skill.id} skill={skill} />;
           }
         } else return null;
       })}

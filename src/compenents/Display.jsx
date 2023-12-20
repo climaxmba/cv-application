@@ -92,7 +92,7 @@ function CustomSectn() {
   );
 }
 
-function SkillsSectn() {
+function SkillsSectn({ skill }) {
   return (
     <section>
       <h2>Skills</h2>
@@ -105,16 +105,32 @@ function SkillsSectn() {
   );
 }
 
-export default function Display() {
-  // TODO
+export default function Display({
+  general,
+  summary,
+  education,
+  experience,
+  skill,
+  sectionsInfo,
+}) {
   return (
     <div id="cv-disp">
-      <GeneralSectn />
-      <SummarySectn />
-      <CustomSectn />
-      <ExperienceSectn />
-      <EducationSectn />
-      <SkillsSectn />
+      {sectionsInfo.map((sectionInfo) => {
+        if (sectionInfo.isVisible) {
+          switch (sectionInfo.section) {
+            case "general":
+              return <GeneralSectn key={general.id} general={general} />;
+            case "summary":
+              return <SummarySectn key={summary.id} summary={summary} />;
+            case "education":
+              return <EducationSectn key={education.id} education={education} />;
+            case "experience":
+              return <ExperienceSectn key={experience.id} experience={experience} />;
+            case "skills":
+              return <SkillsSectn key={skill.id} skill={skill} />;              <CustomSectn key={customSectns.id} customSectns={customSectns} />;
+          }
+        } else return null;
+      })}
     </div>
   );
 }

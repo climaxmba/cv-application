@@ -1,7 +1,7 @@
 function GeneralSectn({ general }) {
   return (
     general.name && (
-      <section>
+      <section id="general-sectn">
         <h2 id="candidatename">{general.name}</h2>
         <div id="contact-contr">
           <a href={`mailto:${general.mail}`}>
@@ -22,7 +22,7 @@ function GeneralSectn({ general }) {
 function SummarySectn({ summary }) {
   return (
     summary.text && (
-      <section>
+      <section id="summary-sectn">
         <h2>Summary</h2>
         <p>{summary.text}</p>
       </section>
@@ -32,7 +32,7 @@ function SummarySectn({ summary }) {
 
 function ExperienceSectn({ experience }) {
   return (
-    <section>
+    <section id="experience-sectn">
       <h2>Experience</h2>
 
       {experience.experiences.map((exp, i) => (
@@ -49,7 +49,7 @@ function ExperienceSectn({ experience }) {
 
 function EducationSectn({ education }) {
   return (
-    <section>
+    <section id="education-sectn">
       <h2>Education</h2>
       <div id="educations">
         {education.schools.map((school) => {
@@ -70,7 +70,7 @@ function EducationSectn({ education }) {
 
 function SkillsSectn({ skill }) {
   return (
-    <section>
+    <section id="skills-sectn">
       <h2>Skills</h2>
       <ul id="skill-list">
         {skill.skills.map((skillElem) => (

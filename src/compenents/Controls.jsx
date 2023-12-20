@@ -73,6 +73,20 @@ function SummaryForm() {
   );
 }
 
+function SkillForm() {
+  return (
+    <section id="skill-sectn">
+      <h2>Skills</h2>
+      <Form>
+        <div>
+          <label htmlFor="skills">Enter your skills</label>
+          <input type="text" name="skills" id="skills" />
+        </div>
+      </Form>
+    </section>
+  );
+}
+
 function WorkExpForm() {
   return (
     <section id="job-sectn">
@@ -120,14 +134,43 @@ function AddBtnsContr() {
   );
 }
 
-export default function Controls() {
+export default function Controls(
+  general,
+  setGeneral,
+  summary,
+  setSummary,
+  education,
+  setEducation,
+  experience,
+  setExperience,
+  skill,
+  setSkill,
+  sectionsInfo,
+  setSectionsInfo
+) {
   return (
     <div id="ctrls-contr">
-      <ActiveForms>
-        <GeneralForm />
-        <EducationForm />
-      </ActiveForms>
-      <AddBtnsContr />
+      <div id="tabs">
+        <input type="radio" id="frms-tab" name="active-tab" checked />
+        <input type="radio" id="disp-tab" name="active-tab" />
+
+        <div className="tabs-contr">
+          <label htmlFor="frms-tab">Add Section</label>
+          <label htmlFor="disp-tab">Preview</label>
+        </div>
+        
+        <div id="frms">
+          <ActiveForms>
+            <GeneralForm />
+            <EducationForm />
+            <SkillForm />
+          </ActiveForms>
+          <AddBtnsContr />
+        </div>
+        <div id="disp">
+          {/* <p>Display</p> */}
+        </div>
+      </div>
     </div>
   );
 }

@@ -9,18 +9,53 @@
   gap: 1rem;
 }
 
+input[name="active-tab"] {
+  display: none;
+}
+
+input[name="active-tab"]~.tabs-contr label {
+  border-bottom: 2px solid;
+  border-color: transparent;
+  /* transition: border-color 0.35s ease-in; */
+}
+
+input#frms-tab:checked~.tabs-contr label[for="frms-tab"],
+input#disp-tab:checked~.tabs-contr label[for="disp-tab"] {
+  border-color: royalblue;
+}
+
+input#frms-tab:checked~#frms,
+input#disp-tab:checked~#disp {
+  display: block;
+}
+
+#frms,
+#disp {
+  display: none;
+}
+
+.tabs-contr {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 3rem;
+}
+
+.tabs-contr label {
+  padding-bottom: 5px;
+}
+
 form {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
 
-form > div {
+form>div {
   display: flex;
   flex-direction: column;
 }
 
-label {
+label:not(.tabs-contr label) {
   letter-spacing: 0.8px;
 }
 
@@ -31,16 +66,20 @@ textarea {
   padding: 0.3rem 0.4rem;
   border-color: grey !important;
 }
+
 input {
   border: none;
   border-bottom: 2px solid;
 }
+
 input:focus-visible {
   border-bottom: 2px solid royalblue !important;
 }
+
 textarea {
   border-width: 2px;
 }
+
 textarea:focus-visible {
   border: 2px solid royalblue !important;
 }
@@ -48,6 +87,7 @@ textarea:focus-visible {
 button[type="submit"] {
   margin-top: 1rem;
 }
+
 button[type="submit"]:focus-visible,
 button[type="submit"]:hover {
   background-color: royalblue;

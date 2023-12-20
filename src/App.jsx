@@ -1,5 +1,6 @@
 // import { useState } from 'react'
 import "./styles/App.css";
+import "./styles/Display.css";
 import "./styles/Controls.css";
 import "./styles/utils.css";
 import Controls from "./compenents/Controls";

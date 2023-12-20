@@ -1,0 +1,56 @@
+#cv-disp {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#candidatename {
+  font-size: xx-large;
+  font-weight: 630;
+}
+
+#cv-disp h2,
+#cv-disp h3:not(.schoolname) {
+  margin-bottom: 0.5rem;
+}
+#cv-disp p {
+  margin: 0.8rem 0;
+}
+
+#contact-contr {
+  display: flex;
+  justify-content: space-between;
+}
+
+p.jobdetails {
+  margin: 0.2rem 0 !important;
+}
+.companyname {
+  font-weight: 600;
+}
+
+#educations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+h3.schoolname {
+  margin: 0;
+}
+.date {
+    font-style: italic;
+}
+
+#skill-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+#skill-list li::after {
+  content: "|";
+  padding: 0 1rem;
+}
+#skill-list li:last-child::after {
+  content: none;
+}

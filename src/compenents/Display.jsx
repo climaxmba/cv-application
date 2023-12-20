@@ -63,17 +63,18 @@ function EducationSectn() {
   return (
     <section>
       <h2>Education</h2>
+      <div id="educations">
+        <div className="edu-contrs">
+          <h3 className="schoolname">Harvard</h3>
+          <div className="coursename">BSc. Computer Engineering</div>
+          <div className="date">Feb 2005 - 2012</div>
+        </div>
 
-      <div className="edu-contrs">
-        <h2 className="schoolname">Harvard</h2>
-        <div className="coursename">BSc. Computer Engineering</div>
-        <div className="date">Feb 2005 - 2012</div>
-      </div>
-
-      <div className="edu-contrs">
-        <h2 className="schoolname">Cousera</h2>
-        <div className="coursename">Cloud Computing</div>
-        <div className="date">May 2019 - Sept 2019</div>
+        <div className="edu-contrs">
+          <h3 className="schoolname">Cousera</h3>
+          <div className="coursename">Cloud Computing</div>
+          <div className="date">May 2019 - Sept 2019</div>
+        </div>
       </div>
     </section>
   );
@@ -83,7 +84,10 @@ function CustomSectn() {
   return (
     <section>
       <h2>Custom Section</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, fugit!</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+        fugit!
+      </p>
     </section>
   );
 }
@@ -92,7 +96,7 @@ function SkillsSectn() {
   return (
     <section>
       <h2>Skills</h2>
-      <ul>
+      <ul id="skill-list">
         <li>HTML</li>
         <li>JavaScript</li>
         <li>CSS</li>

@@ -1,9 +1,6 @@
 import { useState } from "react";
 // import sampleData from "./assets/sampleData.json";
 import "./styles/App.css";
-import "./styles/Display.css";
-import "./styles/Controls.css";
-import "./styles/utils.css";
 import Controls from "./compenents/Controls";
 import Display from "./compenents/Display";
 import { PanneledDiv } from "./compenents/utils";

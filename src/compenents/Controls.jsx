@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { ReactSortable } from "react-sortablejs";
+
 function Form({ children, submitTxt = "Save", onSubmit }) {
   return (
     <form onSubmit={onSubmit}>
@@ -134,7 +137,7 @@ function AddBtnsContr() {
   );
 }
 
-export default function Controls(
+export default function Controls({
   general,
   setGeneral,
   summary,
@@ -146,19 +149,37 @@ export default function Controls(
   skill,
   setSkill,
   sectionsInfo,
-  setSectionsInfo
-) {
+  setSectionsInfo,
+}) {
+  const [activeTab, setActiveTab] = useState("frms-tab");
+
+  function handleTabChange(e) {
+    setActiveTab(e.target.getAttribute("for"));
+  }
   return (
     <div id="ctrls-contr">
       <div id="tabs">
-        <input type="radio" id="frms-tab" name="active-tab" checked />
-        <input type="radio" id="disp-tab" name="active-tab" />
+        {activeTab === "frms-tab" ? (
+          <>
+            <input type="radio" id="frms-tab" name="active-tab" checked />
+            <input type="radio" id="disp-tab" name="active-tab" />
+          </>
+        ) : (
+          <>
+            <input type="radio" id="frms-tab" name="active-tab" />
+            <input type="radio" id="disp-tab" name="active-tab" checked />
+          </>
+        )}
 
         <div className="tabs-contr">
-          <label htmlFor="frms-tab">Add Section</label>
-          <label htmlFor="disp-tab">Preview</label>
+          <label htmlFor="frms-tab" onClick={handleTabChange}>
+            Add Section
+          </label>
+          <label htmlFor="disp-tab" onClick={handleTabChange}>
+            Preview
+          </label>
         </div>
-        
+
         <div id="frms">
           <ActiveForms>
             <GeneralForm />
@@ -168,7 +189,14 @@ export default function Controls(
           <AddBtnsContr />
         </div>
         <div id="disp">
-          {/* <p>Display</p> */}
+          <ReactSortable list={sectionsInfo} setList={setSectionsInfo}>
+            {sectionsInfo.map((sectn) => (
+              <div key={sectn.section}>
+                
+                {sectn.section}
+              </div>
+            ))}
+          </ReactSortable>
         </div>
       </div>
     </div>

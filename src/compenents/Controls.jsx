@@ -172,11 +172,11 @@ export default function Controls({
         )}
 
         <div className="tabs-contr">
-          <label htmlFor="frms-tab" onClick={handleTabChange}>
+          <label htmlFor="frms-tab" className="clickable" onClick={handleTabChange}>
             Add Section
           </label>
-          <label htmlFor="disp-tab" onClick={handleTabChange}>
-            Preview
+          <label htmlFor="disp-tab" className="clickable" onClick={handleTabChange}>
+            Sections
           </label>
         </div>
 
@@ -189,12 +189,13 @@ export default function Controls({
           <AddBtnsContr />
         </div>
         <div id="disp">
-          <ReactSortable list={sectionsInfo} setList={setSectionsInfo}>
+          <ReactSortable tag={"ul"} id="sectn-order-contr" list={sectionsInfo} setList={setSectionsInfo}>
             {sectionsInfo.map((sectn) => (
-              <div key={sectn.section}>
-                
-                {sectn.section}
-              </div>
+              <li className="movable" key={sectn.section}>
+                <span className="icons clickable">Move</span>
+                <div>{sectn.section}</div>
+                <span className="icons clickable">Delete</span>
+              </li>
             ))}
           </ReactSortable>
         </div>

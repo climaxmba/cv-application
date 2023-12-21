@@ -93,3 +93,19 @@ button[type="submit"]:hover {
   background-color: royalblue;
   color: white;
 }
+
+#sectn-order-contr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+}
+#sectn-order-contr li {
+  display: flex;
+  gap: 3px;
+  padding: 0.4rem;
+  border: 1px solid;
+  border-radius: 4px;
+  list-style: none;
+  text-transform: capitalize;
+}

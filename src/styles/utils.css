@@ -1,3 +1,11 @@
+.clickable {
+  cursor: pointer;
+}
+
+.movable {
+  cursor: move;
+}
+
 .panneled-div {
   display: flex;
   gap: 0.5rem;

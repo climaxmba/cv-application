@@ -11,10 +11,10 @@ function GeneralSectn({ general }) {
             <Icon path={mdiEmail} className='icons' />
             <span className="linktxt">{general.mail}</span>
           </a>
-          <a className='icons-and-elem'>
+          {general.phone !== "" && (<a className='icons-and-elem'>
             <Icon path={mdiPhone} className='icons' />
             <span className="linktxt">{general.phone}</span>
-          </a>
+          </a>)}
         </div>
         <div id="social-conrtr">LinkedIn, Facebook, GitHub</div>
       </section>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
+import Icon from '@mdi/react';
+import { mdiPlusThick, mdiCog, mdiCursorMove, mdiPencil, mdiTrashCanOutline } from '@mdi/js';
 
 function Form({ children, submitTxt = "Save", onSubmit }) {
   return (
@@ -17,12 +19,12 @@ function GeneralForm() {
       <Form>
         <div>
           <label htmlFor="person-name">Name:</label>
-          <input type="text" name="person-name" id="person-name" />
+          <input type="text" name="person-name" id="person-name" required />
         </div>
 
         <div>
           <label htmlFor="person-email">Email:</label>
-          <input type="text" name="person-name" id="person-email" />
+          <input type="text" name="person-name" id="person-email" required />
         </div>
 
         <div>
@@ -41,7 +43,7 @@ function EducationForm() {
       <Form>
         <div>
           <label htmlFor="edu-name">School Name:</label>
-          <input type="text" name="edu-name" id="edu-name" />
+          <input type="text" name="edu-name" id="edu-name" required />
         </div>
 
         <div>
@@ -69,7 +71,7 @@ function SummaryForm() {
       <h2>Summary</h2>
       <Form>
         <div>
-          <textarea name="summary" id="summary" cols="30" rows="10"></textarea>
+          <textarea name="summary" id="summary" cols="30" rows="10" required></textarea>
         </div>
       </Form>
     </section>
@@ -97,12 +99,12 @@ function WorkExpForm() {
       <Form>
         <div>
           <label htmlFor="job-comp">Company Name:</label>
-          <input type="text" name="comp-name" id="job-comp" />
+          <input type="text" name="comp-name" id="job-comp" required />
         </div>
 
         <div>
           <label htmlFor="job-title">Job Title:</label>
-          <input type="text" name="job-title" id="job-title" />
+          <input type="text" name="job-title" id="job-title" required />
         </div>
 
         <div>
@@ -172,10 +174,12 @@ export default function Controls({
         )}
 
         <div className="tabs-contr">
-          <label htmlFor="frms-tab" className="clickable" onClick={handleTabChange}>
+          <label htmlFor="frms-tab" className="clickable text-with-icons" onClick={handleTabChange}>
+            <Icon path={mdiPlusThick} className="icons" />
             Add Section
           </label>
-          <label htmlFor="disp-tab" className="clickable" onClick={handleTabChange}>
+          <label htmlFor="disp-tab" className="clickable text-with-icons" onClick={handleTabChange}>
+            <Icon path={mdiCog} className="icons" />
             Sections
           </label>
         </div>
@@ -192,9 +196,10 @@ export default function Controls({
           <ReactSortable tag={"ul"} id="sectn-order-contr" list={sectionsInfo} setList={setSectionsInfo}>
             {sectionsInfo.map((sectn) => (
               <li className="movable" key={sectn.section}>
-                <span className="icons clickable">Move</span>
-                <div>{sectn.section}</div>
-                <span className="icons clickable">Delete</span>
+                <Icon title="Move Section" path={mdiCursorMove} className="icons" />
+                <div className="section-names">{sectn.section}</div>
+                <Icon title="Edit Section" path={mdiPencil} className="icons clickable" />
+                <Icon title="Delete Section" path={mdiTrashCanOutline} className="icons clickable" />
               </li>
             ))}
           </ReactSortable>

@@ -6,6 +6,16 @@
   cursor: move;
 }
 
+svg.icons {
+  width: 1.5rem;
+}
+
+.text-with-icons,
+.icons-and-elem {
+  display: flex;
+  gap: 0.3rem;
+}
+
 .panneled-div {
   display: flex;
   gap: 0.5rem;

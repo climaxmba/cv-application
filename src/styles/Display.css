@@ -47,6 +47,10 @@ p.jobdetails {
 }
 h3.schoolname {
   margin: 0;
+
+  /* Icon spacing */
+  display: flex;
+  gap: 0.3rem;
 }
 .date {
   font-style: italic;

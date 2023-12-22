@@ -102,10 +102,16 @@ button[type="submit"]:hover {
 }
 #sectn-order-contr li {
   display: flex;
-  gap: 3px;
+  gap: 0.4rem;
   padding: 0.4rem;
   border: 1px solid;
   border-radius: 4px;
   list-style: none;
   text-transform: capitalize;
+}
+#sectn-order-contr li .icons {
+  flex: 0 0 auto;
+}
+#sectn-order-contr li .section-names {
+  flex: 1 1 auto;
 }

@@ -121,15 +121,15 @@ function SummaryForm({ summary, setSummary }) {
 function SkillForm({ skill, setSkill }) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
-    setSkill(data.skills.split(", "));
+    setSkill({...skill, skills: data.skills.split(", ")});
   }
   return (
     <section id="skill-sectn">
       <h2>Skills</h2>
       <Form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="skills">Enter your skills seperated by comma, &ldquo;,&rdquo;</label>
-          <input type="text" name="skills" id="skills" value={skill.skills.join(", ")} />
+          <label htmlFor="skills">Enter your skills seperated by comma and space, &ldquo;, &rdquo;</label>
+          <input type="text" name="skills" id="skills" defaultValue={skill.skills.join(", ")} />
         </div>
       </Form>
     </section>
@@ -225,13 +225,13 @@ export default function Controls({
       <div id="tabs">
         {activeTab === "frms-tab" ? (
           <>
-            <input type="radio" id="frms-tab" name="active-tab" checked />
+            <input type="radio" id="frms-tab" name="active-tab" defaultChecked />
             <input type="radio" id="disp-tab" name="active-tab" />
           </>
         ) : (
           <>
             <input type="radio" id="frms-tab" name="active-tab" />
-            <input type="radio" id="disp-tab" name="active-tab" checked />
+            <input type="radio" id="disp-tab" name="active-tab" defaultChecked />
           </>
         )}
 

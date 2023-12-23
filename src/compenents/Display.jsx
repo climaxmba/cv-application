@@ -1,5 +1,5 @@
-import Icon from '@mdi/react';
-import { mdiEmail, mdiPhone, mdiLinkVariant } from '@mdi/js';
+import Icon from "@mdi/react";
+import { mdiEmail, mdiPhone, mdiLinkVariant } from "@mdi/js";
 
 function GeneralSectn({ general }) {
   return (
@@ -7,14 +7,16 @@ function GeneralSectn({ general }) {
       <section id="general-sectn">
         <h2 id="candidatename">{general.name}</h2>
         <div id="contact-contr">
-          <a href={`mailto:${general.mail}`} className='icons-and-elem'>
-            <Icon path={mdiEmail} className='icons' />
+          <a href={`mailto:${general.mail}`} className="icons-and-elem">
+            <Icon path={mdiEmail} className="icons" />
             <span className="linktxt">{general.mail}</span>
           </a>
-          {general.phone !== "" && (<a className='icons-and-elem'>
-            <Icon path={mdiPhone} className='icons' />
-            <span className="linktxt">{general.phone}</span>
-          </a>)}
+          {general.phone !== "" && (
+            <a className="icons-and-elem">
+              <Icon path={mdiPhone} className="icons" />
+              <span className="linktxt">{general.phone}</span>
+            </a>
+          )}
         </div>
         <div id="social-conrtr">LinkedIn, Facebook, GitHub</div>
       </section>
@@ -41,10 +43,15 @@ function ExperienceSectn({ experience }) {
       {experience.experiences.map((exp, i) => (
         <div key={i} className="exp-contrs">
           <h3 className="jobtitle">{exp.title}</h3>
-          <div className="companyname text-with-icons">
-            <Icon path={mdiLinkVariant} className='icons' />
+          <a
+            href={exp.url}
+            className={`companyname text-with-icons clickable ${
+              exp.url ? "url" : "no-url"
+            }`}
+          >
+            {exp.url && <Icon path={mdiLinkVariant} className="icons" />}
             {exp.company}
-          </div>
+          </a>
           <div className="date">{`${exp.startDate} - ${exp.endDate}`}</div>
           <p className="jobdetails">{exp.jobDescription}</p>
         </div>
@@ -61,10 +68,14 @@ function EducationSectn({ education }) {
         {education.schools.map((school) => {
           return (
             <div key={school.schoolName} className="edu-contrs">
-              <h3 className="schoolname text-with-icons">
-                <Icon path={mdiLinkVariant} className='icons' />
+              <a href={school.url}
+                className={`schoolname text-with-icons clickable ${
+                  school.url ? "url" : "no-url"
+                }`}
+              >
+                {school.url && <Icon path={mdiLinkVariant} className="icons" />}
                 {school.schoolName}
-              </h3>
+              </a>
               {school.course && (
                 <div className="coursename">{school.course}</div>
               )}

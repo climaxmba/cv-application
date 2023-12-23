@@ -7,7 +7,9 @@ import Icon from "@mdi/react";
 import {
   mdiPlusThick,
   mdiCog,
-  mdiCursorMove,
+  mdiDragVertical,
+  mdiEye,
+  mdiEyeOff,
   mdiPencil,
   mdiTrashCanOutline,
 } from "@mdi/js";
@@ -69,6 +71,7 @@ function EducationForm({ education, setEducation }) {
       course: data.eduPrgm,
       startDate: new Date(data.eduStartDate).toDateString(),
       endDate: new Date(data.eduEndDate).toDateString(),
+      url: data.eduUrl
     });
     setEducation(educationCopy);
   }
@@ -84,6 +87,11 @@ function EducationForm({ education, setEducation }) {
         <div>
           <label htmlFor="edu-prgm">Educational Program:</label>
           <input type="text" name="eduPrgm" id="edu-prgm" />
+        </div>
+
+        <div>
+          <label htmlFor="edu-url">Include URL</label>
+          <input type="url" name="eduUrl" id="edu-url" />
         </div>
 
         <div>
@@ -111,7 +119,13 @@ function SummaryForm({ summary, setSummary }) {
       <h2>Summary</h2>
       <Form onSubmit={handleSubmit}>
         <div>
-          <textarea name="summary" id="summary" cols="30" rows="10"></textarea>
+          <textarea
+            name="summary"
+            id="summary"
+            cols="30"
+            rows="10"
+            defaultValue={summary.text}
+          ></textarea>
         </div>
       </Form>
     </section>
@@ -121,15 +135,22 @@ function SummaryForm({ summary, setSummary }) {
 function SkillForm({ skill, setSkill }) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
-    setSkill({...skill, skills: data.skills.split(", ")});
+    setSkill({ ...skill, skills: data.skills.split(", ") });
   }
   return (
     <section id="skill-sectn">
       <h2>Skills</h2>
       <Form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="skills">Enter your skills seperated by comma and space, &ldquo;, &rdquo;</label>
-          <input type="text" name="skills" id="skills" defaultValue={skill.skills.join(", ")} />
+          <label htmlFor="skills">
+            Enter your skills seperated by comma and space, &ldquo;, &rdquo;
+          </label>
+          <input
+            type="text"
+            name="skills"
+            id="skills"
+            defaultValue={skill.skills.join(", ")}
+          />
         </div>
       </Form>
     </section>
@@ -147,6 +168,7 @@ function WorkExpForm({ experience, setExperience }) {
       endDate: new Date(data.jobEndDate).toDateString(),
       company: data.compName,
       jobDescription: data.jobDescription,
+      url: data.compUrl,
     });
     setExperience(experienceCopy);
   }
@@ -157,6 +179,11 @@ function WorkExpForm({ experience, setExperience }) {
         <div>
           <label htmlFor="job-comp">Company Name:</label>
           <input type="text" name="compName" id="job-comp" required />
+        </div>
+
+        <div>
+          <label htmlFor="comp-url">Include URL</label>
+          <input type="url" name="compUrl" id="comp-url" />
         </div>
 
         <div>
@@ -225,13 +252,23 @@ export default function Controls({
       <div id="tabs">
         {activeTab === "frms-tab" ? (
           <>
-            <input type="radio" id="frms-tab" name="active-tab" defaultChecked />
+            <input
+              type="radio"
+              id="frms-tab"
+              name="active-tab"
+              defaultChecked
+            />
             <input type="radio" id="disp-tab" name="active-tab" />
           </>
         ) : (
           <>
             <input type="radio" id="frms-tab" name="active-tab" />
-            <input type="radio" id="disp-tab" name="active-tab" defaultChecked />
+            <input
+              type="radio"
+              id="disp-tab"
+              name="active-tab"
+              defaultChecked
+            />
           </>
         )}
 
@@ -258,7 +295,8 @@ export default function Controls({
           <ActiveForms>
             <GeneralForm general={general} setGeneral={setGeneral} />
             <EducationForm education={education} setEducation={setEducation} />
-            <SkillForm skill={skill} setSkill={setSkill} />
+            <WorkExpForm experience={experience} setExperience={setExperience} />
+            <SummaryForm summary={summary} setSummary={setSummary} />
           </ActiveForms>
           <AddBtnsContr />
         </div>
@@ -271,10 +309,11 @@ export default function Controls({
           >
             {sectionsInfo.map((sectn) => (
               <li className="movable" key={sectn.section}>
+                <Icon title="Drag" path={mdiDragVertical} className="icons" />
                 <Icon
-                  title="Move Section"
-                  path={mdiCursorMove}
-                  className="icons"
+                  title="Toggle Visibility"
+                  path={sectn.isVisible ? mdiEye : mdiEyeOff}
+                  className="icons clickable"
                 />
                 <div className="section-names">{sectn.section}</div>
                 <Icon

@@ -45,12 +45,9 @@ p.jobdetails {
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1fr;
 }
-h3.schoolname {
-  margin: 0;
-
-  /* Icon spacing */
-  display: flex;
-  gap: 0.3rem;
+.schoolname {
+  font-weight: bold;
+  font-size: large;
 }
 .date {
   font-style: italic;

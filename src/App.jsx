@@ -39,12 +39,14 @@ const educationData = {
       course: "BSc. Computer Engineering",
       startDate: "Feb 2005",
       endDate: "Sept 2012",
+      url: "",
     },
     {
       schoolName: "Cousera",
       course: "Cloud Computing",
       startDate: "May 2019",
       endDate: "Sept 2019",
+      url: "",
     },
   ],
 };
@@ -58,6 +60,7 @@ const experienceData = {
       endDate: "Present",
       company: "Meta",
       jobDescription: "Job decsciption",
+      url: "",
     },
     {
       title: "App Developer",
@@ -65,6 +68,7 @@ const experienceData = {
       endDate: "Dec 2019",
       company: "Netflix",
       jobDescription: "Job decsciption",
+      url: "",
     },
   ],
 };

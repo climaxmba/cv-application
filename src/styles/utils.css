@@ -2,6 +2,11 @@
   cursor: pointer;
 }
 
+.no-url {
+  color: inherit;
+  pointer-events: none;
+}
+
 .movable {
   cursor: move;
 }

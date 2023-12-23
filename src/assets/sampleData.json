@@ -30,13 +30,15 @@
         "school": "Harvard",
         "course": "BSc. Computer Engineering",
         "startDate": "Feb 2005",
-        "endDate": "Sept 2012"
+        "endDate": "Sept 2012",
+        "url": ""
       },
       {
         "school": "Cousera",
         "course": "Cloud Computing",
         "startDate": "May 2019",
-        "endDate": "Sept 2019"
+        "endDate": "Sept 2019",
+        "url": ""
       }
     ]
   },
@@ -48,14 +50,16 @@
         "startDate": "Jan 2020",
         "endDate": "Present",
         "company": "Meta",
-        "jobDescription": "Job decsciption"
+        "jobDescription": "Job decsciption",
+        "url": ""
       },
       {
         "title": "App Developer",
         "startDate": "Jan 2018",
         "endDate": "Dec 2019",
         "company": "Netflix",
-        "jobDescription": "Job decsciption"
+        "jobDescription": "Job decsciption",
+        "url": ""
       }
     ]
   },

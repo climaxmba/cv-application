@@ -71,15 +71,18 @@ input {
   border: none;
   border-bottom: 2px solid;
 }
-
+input::placeholder,
+textarea::placeholder {
+  font-style: italic;
+}
 input:focus-visible {
   border-bottom: 2px solid royalblue !important;
 }
 
 textarea {
   border-width: 2px;
+  font-family: inherit;
 }
-
 textarea:focus-visible {
   border: 2px solid royalblue !important;
 }

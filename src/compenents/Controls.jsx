@@ -30,12 +30,12 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
       <Form onSubmit={handleSubmit} formType={isInActiveTab ? "general" : null}>
         <div>
           <label htmlFor="person-name">Name:</label>
-          <input type="text" name="personName" id="person-name" defaultValue={general.name} required />
+          <input type="text" name="personName" id="person-name" placeholder="Ex: Anrew Stone" defaultValue={general.name} required />
         </div>
 
         <div>
           <label htmlFor="person-email">Email:</label>
-          <input type="email" name="personEmail" id="person-email" defaultValue={general.mail} required />
+          <input type="email" name="personEmail" id="person-email" placeholder="Ex: username@example.com" defaultValue={general.mail} required />
         </div>
 
         <div>
@@ -75,17 +75,17 @@ function EducationForm({
       >
         <div>
           <label htmlFor="edu-name">School Name:</label>
-          <input type="text" name="eduName" id="edu-name" required />
+          <input type="text" name="eduName" id="edu-name" placeholder="Ex: University of Cityname" required />
         </div>
 
         <div>
           <label htmlFor="edu-prgm">Educational Program:</label>
-          <input type="text" name="eduPrgm" id="edu-prgm" />
+          <input type="text" name="eduPrgm" id="edu-prgm" placeholder="Ex: BSc. Economics" />
         </div>
 
         <div>
           <label htmlFor="edu-url">Include URL</label>
-          <input type="url" name="eduUrl" id="edu-url" />
+          <input type="url" name="eduUrl" id="edu-url" placeholder="Ex: https://examplesite.com" />
         </div>
 
         <div>
@@ -118,6 +118,7 @@ function SummaryForm({ summary, setSummary, Form, isInActiveTab = true }) {
             id="summary"
             cols="30"
             rows="10"
+            placeholder="Ex: Project Manager with over 5 years of experience..."
             defaultValue={summary.text}
           ></textarea>
         </div>
@@ -143,6 +144,7 @@ function SkillForm({ skill, setSkill, Form, isInActiveTab = true }) {
             type="text"
             name="skills"
             id="skills"
+            placeholder="Ex: Algorithms, Collaboration"
             defaultValue={skill.skills.join(", ")}
           />
         </div>
@@ -180,17 +182,17 @@ function WorkExpForm({
       >
         <div>
           <label htmlFor="job-comp">Company Name:</label>
-          <input type="text" name="compName" id="job-comp" required />
+          <input type="text" name="compName" id="job-comp" placeholder="Ex: Google LLC" required />
         </div>
 
         <div>
           <label htmlFor="comp-url">Include URL</label>
-          <input type="url" name="compUrl" id="comp-url" />
+          <input type="url" name="compUrl" id="comp-url" placeholder="Ex: https://google.com" />
         </div>
 
         <div>
           <label htmlFor="job-title">Job Title:</label>
-          <input type="text" name="job-title" id="job-title" required />
+          <input type="text" name="job-title" id="job-title" placeholder="Ex: Project Manager" required />
         </div>
 
         <div>
@@ -205,7 +207,7 @@ function WorkExpForm({
 
         <div>
           <label htmlFor="job-sum">Job Summary</label>
-          <textarea type="date" name="jobDescription" id="job-sum"></textarea>
+          <textarea type="date" name="jobDescription" id="job-sum" placeholder="A brief summary about your time here"></textarea>
         </div>
       </Form>
     </section>

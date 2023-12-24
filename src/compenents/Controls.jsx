@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 
-import sampleData from "../assets/sampleData.json";
+// import sampleData from "../assets/sampleData.json";
 
 import Icon from "@mdi/react";
 import {
@@ -14,21 +14,7 @@ import {
   mdiTrashCanOutline,
 } from "@mdi/js";
 
-function Form({ children, submitTxt = "Save", onSubmit }) {
-  function handleOnSubmit(e) {
-    e.preventDefault();
-    onSubmit(e);
-  }
-
-  return (
-    <form onSubmit={handleOnSubmit}>
-      {children}
-      <button type="submit">{submitTxt}</button>
-    </form>
-  );
-}
-
-function GeneralForm({ general, setGeneral }) {
+function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
     setGeneral({
@@ -41,27 +27,32 @@ function GeneralForm({ general, setGeneral }) {
   return (
     <section id="general-sectn">
       <h2>General Information</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "general" : null}>
         <div>
           <label htmlFor="person-name">Name:</label>
-          <input type="text" name="personName" id="person-name" required />
+          <input type="text" name="personName" id="person-name" defaultValue={general.name} required />
         </div>
 
         <div>
           <label htmlFor="person-email">Email:</label>
-          <input type="email" name="personEmail" id="person-email" required />
+          <input type="email" name="personEmail" id="person-email" defaultValue={general.mail} required />
         </div>
 
         <div>
           <label htmlFor="person-phone">Phone Number:</label>
-          <input type="number" name="personPhone" id="person-phone" />
+          <input type="number" name="personPhone" id="person-phone" defaultValue={general.phone} />
         </div>
       </Form>
     </section>
   );
 }
 
-function EducationForm({ education, setEducation }) {
+function EducationForm({
+  education,
+  setEducation,
+  Form,
+  isInActiveTab = true,
+}) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
     const educationCopy = { ...education };
@@ -71,14 +62,17 @@ function EducationForm({ education, setEducation }) {
       course: data.eduPrgm,
       startDate: new Date(data.eduStartDate).toDateString(),
       endDate: new Date(data.eduEndDate).toDateString(),
-      url: data.eduUrl
+      url: data.eduUrl,
     });
     setEducation(educationCopy);
   }
   return (
     <section id="edu-sectn">
       <h2>Education</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={handleSubmit}
+        formType={isInActiveTab ? "education" : null}
+      >
         <div>
           <label htmlFor="edu-name">School Name:</label>
           <input type="text" name="eduName" id="edu-name" required />
@@ -108,7 +102,7 @@ function EducationForm({ education, setEducation }) {
   );
 }
 
-function SummaryForm({ summary, setSummary }) {
+function SummaryForm({ summary, setSummary, Form, isInActiveTab = true }) {
   function handleSubmit(e) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
@@ -117,7 +111,7 @@ function SummaryForm({ summary, setSummary }) {
   return (
     <section id="summary-sectn">
       <h2>Summary</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "summary" : null}>
         <div>
           <textarea
             name="summary"
@@ -132,7 +126,7 @@ function SummaryForm({ summary, setSummary }) {
   );
 }
 
-function SkillForm({ skill, setSkill }) {
+function SkillForm({ skill, setSkill, Form, isInActiveTab = true }) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
     setSkill({ ...skill, skills: data.skills.split(", ") });
@@ -140,7 +134,7 @@ function SkillForm({ skill, setSkill }) {
   return (
     <section id="skill-sectn">
       <h2>Skills</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "skill" : null}>
         <div>
           <label htmlFor="skills">
             Enter your skills seperated by comma and space, &ldquo;, &rdquo;
@@ -157,7 +151,12 @@ function SkillForm({ skill, setSkill }) {
   );
 }
 
-function WorkExpForm({ experience, setExperience }) {
+function WorkExpForm({
+  experience,
+  setExperience,
+  Form,
+  isInActiveTab = true,
+}) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
     const experienceCopy = { ...experience };
@@ -175,7 +174,10 @@ function WorkExpForm({ experience, setExperience }) {
   return (
     <section id="job-sectn">
       <h2>Work Experience</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={handleSubmit}
+        formType={isInActiveTab ? "experience" : null}
+      >
         <div>
           <label htmlFor="job-comp">Company Name:</label>
           <input type="text" name="compName" id="job-comp" required />
@@ -214,16 +216,44 @@ function ActiveForms({ children }) {
   return <div id="active-form-contr">{children}</div>;
 }
 
-function AddBtns({ text }) {
-  return <button type="button">{text}</button>;
+function AddBtns({ text, clickHandler }) {
+  return (
+    <button type="button" onClick={clickHandler}>
+      {text}
+    </button>
+  );
 }
 
-function AddBtnsContr() {
+function AddBtnsContr({ activeFormList, setActiveFormList }) {
+  function addFormHandler(formType) {
+    return () => setActiveFormList([...activeFormList, formType]);
+  }
   return (
     <div id="addbtns-contr">
-      <AddBtns text="Add Experience" />
-      <AddBtns text="Add Education" />
-      <AddBtns text="Add Socials" />
+      {!activeFormList.includes("general") && (
+        <AddBtns text="Set General" clickHandler={addFormHandler("general")} />
+      )}
+      {!activeFormList.includes("skill") && (
+        <AddBtns text="Set Skills" clickHandler={addFormHandler("skill")} />
+      )}
+      {!activeFormList.includes("summary") && (
+        <AddBtns text="Set Summary" clickHandler={addFormHandler("summary")} />
+      )}
+      {!activeFormList.includes("socials") && (
+        <AddBtns text="Set Socials" clickHandler={addFormHandler("social")} />
+      )}
+      {!activeFormList.includes("experience") && (
+        <AddBtns
+          text="Add Experience"
+          clickHandler={addFormHandler("experience")}
+        />
+      )}
+      {!activeFormList.includes("education") && (
+        <AddBtns
+          text="Add Education"
+          clickHandler={addFormHandler("education")}
+        />
+      )}
     </div>
   );
 }
@@ -243,10 +273,36 @@ export default function Controls({
   setSectionsInfo,
 }) {
   const [activeTab, setActiveTab] = useState("frms-tab");
+  const [activeFormList, setActiveFormList] = useState([
+    "general",
+    "skill",
+    "summary",
+  ]);
+
+  function Form({ children, submitTxt = "Save", onSubmit, formType }) {
+    function handleOnSubmit(e) {
+      e.preventDefault();
+      onSubmit(e);
+      formType &&
+        setActiveFormList(
+          [...activeFormList].filter((elem) => elem !== formType)
+        );
+    }
+
+    return (
+      <form onSubmit={handleOnSubmit}>
+        {children}
+        <button type="submit">{submitTxt}</button>
+      </form>
+    );
+  }
 
   function handleTabChange(e) {
     setActiveTab(e.target.getAttribute("for"));
   }
+  // function toggleVisibility(e) {
+  //   const section = e.currentTarget.parentElement.getAttribute("data-id");
+  // }
   return (
     <div id="ctrls-contr">
       <div id="tabs">
@@ -293,12 +349,60 @@ export default function Controls({
 
         <div id="frms">
           <ActiveForms>
-            <GeneralForm general={general} setGeneral={setGeneral} />
-            <EducationForm education={education} setEducation={setEducation} />
-            <WorkExpForm experience={experience} setExperience={setExperience} />
-            <SummaryForm summary={summary} setSummary={setSummary} />
+            {activeFormList.map((form) => {
+              switch (form) {
+                case "general":
+                  return (
+                    <GeneralForm
+                      key={form}
+                      general={general}
+                      setGeneral={setGeneral}
+                      Form={Form}
+                    />
+                  );
+                case "summary":
+                  return (
+                    <SummaryForm
+                      key={form}
+                      summary={summary}
+                      setSummary={setSummary}
+                      Form={Form}
+                    />
+                  );
+                case "skill":
+                  return (
+                    <SkillForm
+                      key={form}
+                      skill={skill}
+                      setSkill={setSkill}
+                      Form={Form}
+                    />
+                  );
+                case "experience":
+                  return (
+                    <WorkExpForm
+                      key={form}
+                      experience={experience}
+                      setExperience={setExperience}
+                      Form={Form}
+                    />
+                  );
+                case "education":
+                  return (
+                    <EducationForm
+                      key={form}
+                      education={education}
+                      setEducation={setEducation}
+                      Form={Form}
+                    />
+                  );
+              }
+            })}
           </ActiveForms>
-          <AddBtnsContr />
+          <AddBtnsContr
+            activeFormList={activeFormList}
+            setActiveFormList={setActiveFormList}
+          />
         </div>
         <div id="disp">
           <ReactSortable

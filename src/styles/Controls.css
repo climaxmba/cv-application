@@ -84,10 +84,17 @@ textarea:focus-visible {
   border: 2px solid royalblue !important;
 }
 
+#addbtns-contr {
+  border-top: 2px dotted;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
 button[type="submit"] {
   margin-top: 1rem;
 }
-
 button[type="submit"]:focus-visible,
 button[type="submit"]:hover {
   background-color: royalblue;

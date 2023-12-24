@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
+import { v1 as uuid } from 'uuid';
 
 // import sampleData from "../assets/sampleData.json";
 
@@ -63,6 +64,7 @@ function EducationForm({
       startDate: new Date(data.eduStartDate).toDateString(),
       endDate: new Date(data.eduEndDate).toDateString(),
       url: data.eduUrl,
+      id: uuid(),
     });
     setEducation(educationCopy);
   }
@@ -170,6 +172,7 @@ function WorkExpForm({
       company: data.compName,
       jobDescription: data.jobDescription,
       url: data.compUrl,
+      id: uuid(),
     });
     setExperience(experienceCopy);
   }

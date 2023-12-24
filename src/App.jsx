@@ -1,12 +1,13 @@
 import { useState } from "react";
 // import sampleData from "./assets/sampleData.json";
 import "./styles/App.css";
+import { v1 as uuid } from 'uuid';
 import Controls from "./compenents/Controls";
 import Display from "./compenents/Display";
 import { PanneledDiv } from "./compenents/utils";
 
 const generalData = {
-  id: 0,
+  id: uuid(),
   name: "Andrew Stone",
   mail: "andrewstone@not-real-people.com",
   phone: "555-555-555",
@@ -27,14 +28,15 @@ const generalData = {
 };
 
 const summaryData = {
-  id: 1,
+  id: uuid(),
   text: "",
 };
 
 const educationData = {
-  id: 2,
+  id: uuid(),
   schools: [
     {
+      id: uuid(),
       schoolName: "Harvard",
       course: "BSc. Computer Engineering",
       startDate: "Feb 2005",
@@ -42,6 +44,7 @@ const educationData = {
       url: "",
     },
     {
+      id: uuid(),
       schoolName: "Cousera",
       course: "Cloud Computing",
       startDate: "May 2019",
@@ -52,9 +55,10 @@ const educationData = {
 };
 
 const experienceData = {
-  id: 3,
+  id: uuid(),
   experiences: [
     {
+      id: uuid(),
       title: "Software Engineer",
       startDate: "Jan 2020",
       endDate: "Present",
@@ -63,6 +67,7 @@ const experienceData = {
       url: "",
     },
     {
+      id: uuid(),
       title: "App Developer",
       startDate: "Jan 2018",
       endDate: "Dec 2019",
@@ -74,7 +79,7 @@ const experienceData = {
 };
 
 const skillData = {
-  id: 4,
+  id: uuid(),
   skills: ["HTML", "CSS", "JavaScript"],
 };
 

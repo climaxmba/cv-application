@@ -300,9 +300,10 @@ export default function Controls({
   function handleTabChange(e) {
     setActiveTab(e.target.getAttribute("for"));
   }
-  // function toggleVisibility(e) {
-  //   const section = e.currentTarget.parentElement.getAttribute("data-id");
-  // }
+  function toggleVisibility(e) {
+    const section = e.currentTarget.parentElement.getAttribute("data-id");
+    setSectionsInfo(sectionsInfo.map(info => info.section === section ? {...info, isVisible: !info.isVisible} : info));
+  }
   return (
     <div id="ctrls-contr">
       <div id="tabs">
@@ -417,6 +418,7 @@ export default function Controls({
                 <Icon
                   title="Toggle Visibility"
                   path={sectn.isVisible ? mdiEye : mdiEyeOff}
+                  onClick={toggleVisibility}
                   className="icons clickable"
                 />
                 <div className="section-names">{sectn.section}</div>

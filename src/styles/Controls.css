@@ -111,17 +111,19 @@ button[type="submit"]:hover {
   padding: 0;
 }
 #sectn-order-contr li {
+  list-style: none;
+}
+.disp-list-itms {
   display: flex;
   gap: 0.4rem;
   padding: 0.4rem;
   border: 1px solid;
   border-radius: 4px;
-  list-style: none;
   text-transform: capitalize;
 }
-#sectn-order-contr li .icons {
+#sectn-order-contr .disp-list-itms .icons {
   flex: 0 0 auto;
 }
-#sectn-order-contr li .section-names {
+#sectn-order-contr .disp-list-itms .section-names {
   flex: 1 1 auto;
 }

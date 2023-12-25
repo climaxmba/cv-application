@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import sampleData from "./assets/sampleData.json";
 import "./styles/App.css";
-import { v1 as uuid } from 'uuid';
+import { v1 as uuid } from "uuid";
 import Controls from "./compenents/Controls";
 import Display from "./compenents/Display";
 import { PanneledDiv } from "./compenents/utils";
@@ -86,23 +86,28 @@ const skillData = {
 const sectionsInfoData = [
   {
     isVisible: true,
-    section: "general"
+    section: "general",
+    id: uuid(),
   },
   {
     isVisible: true,
-    section: "summary"
+    section: "summary",
+    id: uuid(),
   },
   {
     isVisible: true,
-    section: "experience"
+    section: "experience",
+    id: uuid(),
   },
   {
     isVisible: true,
-    section: "education"
+    section: "education",
+    id: uuid(),
   },
   {
     isVisible: true,
-    section: "skills"
+    section: "skills",
+    id: uuid(),
   },
 ];
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
-import { v1 as uuid } from 'uuid';
+import { v1 as uuid } from "uuid";
 
 // import sampleData from "../assets/sampleData.json";
 
@@ -31,17 +31,36 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
       <Form onSubmit={handleSubmit} formType={isInActiveTab ? "general" : null}>
         <div>
           <label htmlFor="person-name">Name:</label>
-          <input type="text" name="personName" id="person-name" placeholder="Ex: Anrew Stone" defaultValue={general.name} required />
+          <input
+            type="text"
+            name="personName"
+            id="person-name"
+            placeholder="Ex: Anrew Stone"
+            defaultValue={general.name}
+            required
+          />
         </div>
 
         <div>
           <label htmlFor="person-email">Email:</label>
-          <input type="email" name="personEmail" id="person-email" placeholder="Ex: username@example.com" defaultValue={general.mail} required />
+          <input
+            type="email"
+            name="personEmail"
+            id="person-email"
+            placeholder="Ex: username@example.com"
+            defaultValue={general.mail}
+            required
+          />
         </div>
 
         <div>
           <label htmlFor="person-phone">Phone Number:</label>
-          <input type="number" name="personPhone" id="person-phone" defaultValue={general.phone} />
+          <input
+            type="number"
+            name="personPhone"
+            id="person-phone"
+            defaultValue={general.phone}
+          />
         </div>
       </Form>
     </section>
@@ -77,17 +96,33 @@ function EducationForm({
       >
         <div>
           <label htmlFor="edu-name">School Name:</label>
-          <input type="text" name="eduName" id="edu-name" placeholder="Ex: University of Cityname" required />
+          <input
+            type="text"
+            name="eduName"
+            id="edu-name"
+            placeholder="Ex: University of Cityname"
+            required
+          />
         </div>
 
         <div>
           <label htmlFor="edu-prgm">Educational Program:</label>
-          <input type="text" name="eduPrgm" id="edu-prgm" placeholder="Ex: BSc. Economics" />
+          <input
+            type="text"
+            name="eduPrgm"
+            id="edu-prgm"
+            placeholder="Ex: BSc. Economics"
+          />
         </div>
 
         <div>
           <label htmlFor="edu-url">Include URL</label>
-          <input type="url" name="eduUrl" id="edu-url" placeholder="Ex: https://examplesite.com" />
+          <input
+            type="url"
+            name="eduUrl"
+            id="edu-url"
+            placeholder="Ex: https://examplesite.com"
+          />
         </div>
 
         <div>
@@ -185,17 +220,34 @@ function WorkExpForm({
       >
         <div>
           <label htmlFor="job-comp">Company Name:</label>
-          <input type="text" name="compName" id="job-comp" placeholder="Ex: Google LLC" required />
+          <input
+            type="text"
+            name="compName"
+            id="job-comp"
+            placeholder="Ex: Google LLC"
+            required
+          />
         </div>
 
         <div>
           <label htmlFor="comp-url">Include URL</label>
-          <input type="url" name="compUrl" id="comp-url" placeholder="Ex: https://google.com" />
+          <input
+            type="url"
+            name="compUrl"
+            id="comp-url"
+            placeholder="Ex: https://google.com"
+          />
         </div>
 
         <div>
           <label htmlFor="job-title">Job Title:</label>
-          <input type="text" name="job-title" id="job-title" placeholder="Ex: Project Manager" required />
+          <input
+            type="text"
+            name="job-title"
+            id="job-title"
+            placeholder="Ex: Project Manager"
+            required
+          />
         </div>
 
         <div>
@@ -210,7 +262,12 @@ function WorkExpForm({
 
         <div>
           <label htmlFor="job-sum">Job Summary</label>
-          <textarea type="date" name="jobDescription" id="job-sum" placeholder="A brief summary about your time here"></textarea>
+          <textarea
+            type="date"
+            name="jobDescription"
+            id="job-sum"
+            placeholder="A brief summary about your time here"
+          ></textarea>
         </div>
       </Form>
     </section>
@@ -283,6 +340,9 @@ export default function Controls({
     "skill",
     "summary",
   ]);
+  const [dispFormsOpen, setDispFormsOpen] = useState([
+    { section: "general", list: [] },
+  ]);
 
   function Form({ children, submitTxt = "Save", onSubmit, formType }) {
     function handleOnSubmit(e) {
@@ -306,9 +366,22 @@ export default function Controls({
     setActiveTab(e.target.getAttribute("for"));
   }
   function toggleVisibility(e) {
-    const section = e.currentTarget.parentElement.getAttribute("data-id");
-    setSectionsInfo(sectionsInfo.map(info => info.section === section ? {...info, isVisible: !info.isVisible} : info));
+    const section = e.currentTarget.getAttribute("data-sectn");
+    setSectionsInfo(
+      sectionsInfo.map((info) =>
+        info.section === section
+          ? { ...info, isVisible: !info.isVisible }
+          : info
+      )
+    );
   }
+  function handleEditClicked(e) {
+    const section = e.currentTarget.getAttribute("data-sectn"),
+      dispFormsOpenCopy = [...dispFormsOpen];
+    dispFormsOpenCopy.push({ section, list: [] });
+    setDispFormsOpen(dispFormsOpenCopy);
+  }
+
   return (
     <div id="ctrls-contr">
       <div id="tabs">
@@ -418,30 +491,85 @@ export default function Controls({
             setList={setSectionsInfo}
           >
             {sectionsInfo.map((sectn) => (
-              <li className="movable" key={sectn.section}>
-                <Icon title="Drag" path={mdiDragVertical} className="icons" />
-                <Icon
-                  title="Toggle Visibility"
-                  path={sectn.isVisible ? mdiEye : mdiEyeOff}
-                  onClick={toggleVisibility}
-                  className="icons clickable"
-                />
-                <div className="section-names">{sectn.section}</div>
-                <Icon
-                  title="Edit Section"
-                  path={mdiPencil}
-                  className="icons clickable"
-                />
-                <Icon
-                  title="Delete Section"
-                  path={mdiTrashCanOutline}
-                  className="icons clickable"
-                />
-              </li>
+              <SectionsList
+                key={sectn.id}
+                sectn={sectn}
+                Form={Form}
+                toggleVisibility={toggleVisibility}
+                handleEditClicked={handleEditClicked}
+                states={{
+                  general,
+                  setGeneral,
+                  summary,
+                  setSummary,
+                  experience,
+                  setExperience,
+                  education,
+                  setEducation,
+                  skill,
+                  setSkill,
+                  dispFormsOpen
+                }}
+              />
             ))}
           </ReactSortable>
         </div>
       </div>
     </div>
+  );
+}
+
+function SectionsList({ sectn, Form, toggleVisibility, handleEditClicked, states }) {
+  return (
+    <li className="movable">
+      <div className="disp-list-itms">
+        <Icon title="Drag" path={mdiDragVertical} className="icons" />
+        <Icon
+          title="Toggle Visibility"
+          path={sectn.isVisible ? mdiEye : mdiEyeOff}
+          data-sectn={sectn.section}
+          className="icons clickable"
+          onClick={toggleVisibility}
+        />
+        <div className="section-names">{sectn.section}</div>
+        <Icon
+          title="Edit Section"
+          path={mdiPencil}
+          data-sectn={sectn.section}
+          className="icons clickable"
+          onClick={handleEditClicked}
+        />
+        <Icon
+          title="Delete Section"
+          path={mdiTrashCanOutline}
+          data-sectn={sectn.section}
+          className="icons clickable"
+        />
+      </div>
+
+      {states.dispFormsOpen.map((item) => {
+        console.log(item);
+        item.section === sectn.section ? (
+          <>
+            {sectn.section === "general" && (
+              <GeneralForm
+                general={states.general}
+                setGeneral={states.setGeneral}
+                Form={Form}
+                isInActiveTab={false}
+              />
+            )}
+            {sectn.section === "summary" && (
+              <SummaryForm
+                summary={states.summary}
+                setSummary={states.setSummary}
+                Form={Form}
+                isInActiveTab={false}
+              />
+            )}
+          </>
+        ) : null;
+      })}
+    </li>
   );
 }

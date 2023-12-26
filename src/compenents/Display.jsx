@@ -40,8 +40,8 @@ function ExperienceSectn({ experience }) {
     <section id="experience-sectn">
       <h2>Experience</h2>
 
-      {experience.experiences.map((exp, i) => (
-        <div key={i} className="exp-contrs">
+      {experience.experiences.map((exp) => (
+        <div key={exp.id} className="exp-contrs">
           <h3 className="jobtitle">{exp.title}</h3>
           <a
             href={exp.url}

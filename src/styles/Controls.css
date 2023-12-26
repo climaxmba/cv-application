@@ -104,26 +104,33 @@ button[type="submit"]:hover {
   color: white;
 }
 
-#sectn-order-contr {
+#sectn-order-contr,
+#nested-list-contr {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
   padding: 0;
 }
 #sectn-order-contr li {
   list-style: none;
+  border: 1px solid;
 }
-.disp-list-itms {
+.disp-list-itms,
+.nested-disp-list {
   display: flex;
   gap: 0.4rem;
   padding: 0.4rem;
-  border: 1px solid;
   border-radius: 4px;
   text-transform: capitalize;
 }
 #sectn-order-contr .disp-list-itms .icons {
   flex: 0 0 auto;
 }
-#sectn-order-contr .disp-list-itms .section-names {
+#sectn-order-contr .disp-list-itms .section-names,
+.nested-sectn-names {
   flex: 1 1 auto;
+}
+#nested-list-contr {
+  padding: 0.4rem;
+  gap: 0.4rem;
 }

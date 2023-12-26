@@ -201,7 +201,7 @@ function WorkExpForm({
     const experienceCopy = { ...experience };
 
     experienceCopy.experiences.push({
-      title: data.compName,
+      title: data.jobTitle,
       startDate: new Date(data.jobStartDate).toDateString(),
       endDate: new Date(data.jobEndDate).toDateString(),
       company: data.compName,
@@ -243,7 +243,7 @@ function WorkExpForm({
           <label htmlFor="job-title">Job Title:</label>
           <input
             type="text"
-            name="job-title"
+            name="jobTitle"
             id="job-title"
             placeholder="Ex: Project Manager"
             required
@@ -508,7 +508,7 @@ export default function Controls({
                   setEducation,
                   skill,
                   setSkill,
-                  dispFormsOpen
+                  dispFormsOpen,
                 }}
               />
             ))}
@@ -519,7 +519,16 @@ export default function Controls({
   );
 }
 
-function SectionsList({ sectn, Form, toggleVisibility, handleEditClicked, states }) {
+function SectionsList({
+  sectn,
+  // Form,
+  toggleVisibility,
+  handleEditClicked,
+  states,
+}) {
+  function setExpList(expData) {
+    states.setExperience({ ...sectn.experience, experiences: expData });
+  }
   return (
     <li className="movable">
       <div className="disp-list-itms">
@@ -547,12 +556,45 @@ function SectionsList({ sectn, Form, toggleVisibility, handleEditClicked, states
         />
       </div>
 
-      {states.dispFormsOpen.map((item) => {
-        console.log(item);
+      {sectn.section === "experience" && (
+        <ReactSortable
+          tag={"ul"}
+          id="nested-list-contr"
+          list={states.experience.experiences}
+          setList={setExpList}
+        >
+          {states.experience.experiences.map((exp) => (
+            <li key={exp.id} className="nested-disp-list">
+              <Icon title="Drag" path={mdiDragVertical} className="icons" />
+              <div className="nested-sectn-names">
+                {exp.title} - {exp.company}
+              </div>
+              <Icon
+                title="Edit Section"
+                path={mdiPencil}
+                data-sectn={sectn.section}
+                data-expid={exp.id}
+                className="icons clickable"
+                onClick={handleEditClicked}
+              />
+              <Icon
+                title="Delete Section"
+                path={mdiTrashCanOutline}
+                data-sectn={sectn.section}
+                data-expid={exp.id}
+                className="icons clickable"
+              />
+            </li>
+          ))}
+        </ReactSortable>
+      )}
+
+      {/* {states.dispFormsOpen.map((item) =>
         item.section === sectn.section ? (
           <>
             {sectn.section === "general" && (
               <GeneralForm
+                key={states.general.id}
                 general={states.general}
                 setGeneral={states.setGeneral}
                 Form={Form}
@@ -561,6 +603,7 @@ function SectionsList({ sectn, Form, toggleVisibility, handleEditClicked, states
             )}
             {sectn.section === "summary" && (
               <SummaryForm
+                key={states.summary.id}
                 summary={states.summary}
                 setSummary={states.setSummary}
                 Form={Form}
@@ -568,8 +611,8 @@ function SectionsList({ sectn, Form, toggleVisibility, handleEditClicked, states
               />
             )}
           </>
-        ) : null;
-      })}
+        ) : null
+      )} */}
     </li>
   );
 }

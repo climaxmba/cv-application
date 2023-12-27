@@ -2,9 +2,9 @@ import { useState } from "react";
 // import sampleData from "./assets/sampleData.json";
 import "./styles/App.css";
 import { v1 as uuid } from "uuid";
-import Controls from "./compenents/Controls";
-import Display from "./compenents/Display";
-import { PanneledDiv } from "./compenents/utils";
+import Controls from "./components/Controls";
+import Display from "./components/Display";
+import { PanneledDiv } from "./components/utils";
 
 const generalData = {
   id: uuid(),

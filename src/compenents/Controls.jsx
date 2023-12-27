@@ -529,6 +529,9 @@ function SectionsList({
   function setExpList(expData) {
     states.setExperience({ ...sectn.experience, experiences: expData });
   }
+  function setSchools(schoolsData) {
+    states.setEducation({...states.education, schools: schoolsData});
+  }
   return (
     <li className="movable">
       <div className="disp-list-itms">
@@ -570,7 +573,7 @@ function SectionsList({
                 {exp.title} - {exp.company}
               </div>
               <Icon
-                title="Edit Section"
+                title="Edit"
                 path={mdiPencil}
                 data-sectn={sectn.section}
                 data-expid={exp.id}
@@ -578,10 +581,42 @@ function SectionsList({
                 onClick={handleEditClicked}
               />
               <Icon
-                title="Delete Section"
+                title="Delete"
                 path={mdiTrashCanOutline}
                 data-sectn={sectn.section}
                 data-expid={exp.id}
+                className="icons clickable"
+              />
+            </li>
+          ))}
+        </ReactSortable>
+      )}
+      {sectn.section === "education" && (
+        <ReactSortable
+          tag={"ul"}
+          id="nested-list-contr"
+          list={states.education.schools}
+          setList={setSchools}
+        >
+          {states.education.schools.map((school) => (
+            <li key={school.id} className="nested-disp-list">
+              <Icon title="Drag" path={mdiDragVertical} className="icons" />
+              <div className="nested-sectn-names">
+                {school.course} - {school.schoolName}
+              </div>
+              <Icon
+                title="Edit"
+                path={mdiPencil}
+                data-sectn={sectn.section}
+                data-expid={school.id}
+                className="icons clickable"
+                onClick={handleEditClicked}
+              />
+              <Icon
+                title="Delete"
+                path={mdiTrashCanOutline}
+                data-sectn={sectn.section}
+                data-expid={school.id}
                 className="icons clickable"
               />
             </li>

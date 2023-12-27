@@ -489,6 +489,7 @@ export default function Controls({
             id="sectn-order-contr"
             list={sectionsInfo}
             setList={setSectionsInfo}
+            animation={150}
           >
             {sectionsInfo.map((sectn) => (
               <SectionsList
@@ -565,6 +566,7 @@ function SectionsList({
           id="nested-list-contr"
           list={states.experience.experiences}
           setList={setExpList}
+          animation={150}
         >
           {states.experience.experiences.map((exp) => (
             <li key={exp.id} className="nested-disp-list">
@@ -597,6 +599,7 @@ function SectionsList({
           id="nested-list-contr"
           list={states.education.schools}
           setList={setSchools}
+          animation={150}
         >
           {states.education.schools.map((school) => (
             <li key={school.id} className="nested-disp-list">

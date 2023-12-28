@@ -82,8 +82,12 @@ function EducationForm({
     educationCopy.schools.push({
       schoolName: data.eduName,
       course: data.eduPrgm,
-      startDate: new Date(data.eduStartDate).toDateString(),
-      endDate: new Date(data.eduEndDate).toDateString(),
+      startDate: data.eduStartDate
+        ? new Date(data.eduStartDate).toDateString()
+        : null,
+      endDate: data.eduEndDate
+        ? new Date(data.eduEndDate).toDateString()
+        : null,
       url: data.eduUrl,
       id: uuid(),
     });
@@ -127,7 +131,9 @@ function EducationForm({
             id="edu-url"
             placeholder="Ex: https://examplesite.com"
           />
-          <span className="validation-msg">A valid URL starts with https:// or http://</span>
+          <span className="validation-msg">
+            A valid URL starts with https:// or http://
+          </span>
         </div>
 
         <div>
@@ -172,7 +178,7 @@ function SummaryForm({ summary, setSummary, Form, isInActiveTab = true }) {
 function SkillForm({ skill, setSkill, Form, isInActiveTab = true }) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
-    setSkill({ ...skill, skills: data.skills.split(", ") });
+    setSkill({ ...skill, skills: data.skills ? data.skills.split(", ") : [] });
   }
   return (
     <section id="skill-sectn">
@@ -207,8 +213,12 @@ function WorkExpForm({
 
     experienceCopy.experiences.push({
       title: data.jobTitle,
-      startDate: new Date(data.jobStartDate).toDateString(),
-      endDate: new Date(data.jobEndDate).toDateString(),
+      startDate: data.eduStartDate
+        ? new Date(data.eduStartDate).toDateString()
+        : null,
+      endDate: data.eduEndDate
+        ? new Date(data.eduEndDate).toDateString()
+        : null,
       company: data.compName,
       jobDescription: data.jobDescription,
       url: data.compUrl,
@@ -243,7 +253,9 @@ function WorkExpForm({
             id="comp-url"
             placeholder="Ex: https://google.com"
           />
-          <span className="validation-msg">A valid URL starts with https:// or http://</span>
+          <span className="validation-msg">
+            A valid URL starts with https:// or http://
+          </span>
         </div>
 
         <div>
@@ -540,10 +552,21 @@ function SectionsList({
     states.setExperience({ ...sectn.experience, experiences: expData });
   }
   function setSchools(schoolsData) {
-    states.setEducation({...states.education, schools: schoolsData});
+    states.setEducation({ ...states.education, schools: schoolsData });
   }
+
+  const hasNoContent =
+    (sectn.section === "general" && !states.general.name) ||
+    (sectn.section === "summary" && !states.summary.text) ||
+    (sectn.section === "education" && !states.education.schools.length) ||
+    (sectn.section === "experience" && !states.experience.experiences.length) ||
+    (sectn.section === "skills" && !states.skill.skills.length);
+
   return (
-    <li className="movable">
+    <li
+      className={`movable ${hasNoContent && "nocontent-item"}`}
+      title={hasNoContent ? "This section has no content for preview" : ""}
+    >
       <div className="disp-list-itms">
         <Icon title="Drag" path={mdiDragVertical} className="icons" />
         <Icon

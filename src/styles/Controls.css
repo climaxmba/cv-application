@@ -104,6 +104,10 @@ button[type="submit"]:hover {
   color: white;
 }
 
+.nocontent-item {
+  opacity: 0.5;
+}
+
 #sectn-order-contr,
 #nested-list-contr {
   display: flex;
@@ -114,6 +118,7 @@ button[type="submit"]:hover {
 #sectn-order-contr li {
   list-style: none;
   border: 1px solid;
+  border-radius: 4px;
 }
 .disp-list-itms,
 .nested-disp-list {
@@ -125,6 +130,10 @@ button[type="submit"]:hover {
 }
 #sectn-order-contr .disp-list-itms .icons {
   flex: 0 0 auto;
+}
+#sectn-order-contr .icons:first-child {
+  /* Drag icon */
+  opacity: 0.5;
 }
 #sectn-order-contr .disp-list-itms .section-names,
 .nested-sectn-names {

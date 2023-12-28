@@ -52,7 +52,15 @@ function ExperienceSectn({ experience }) {
             {exp.url && <Icon path={mdiLinkVariant} className="icons" />}
             {exp.company}
           </a>
-          <div className="date">{`${exp.startDate} - ${exp.endDate}`}</div>
+          <div className="date">
+            {exp.startDate && exp.endDate
+              ? `${exp.startDate} - ${exp.endDate}`
+              : exp.startDate && !exp.endDate
+              ? exp.startDate
+              : !exp.startDate && exp.endDate
+              ? exp.endDate
+              : ""}
+          </div>
           <p className="jobdetails">{exp.jobDescription}</p>
         </div>
       ))}
@@ -68,7 +76,8 @@ function EducationSectn({ education }) {
         {education.schools.map((school) => {
           return (
             <div key={school.schoolName} className="edu-contrs">
-              <a href={school.url}
+              <a
+                href={school.url}
                 className={`schoolname text-with-icons clickable ${
                   school.url ? "url" : "no-url"
                 }`}
@@ -79,7 +88,15 @@ function EducationSectn({ education }) {
               {school.course && (
                 <div className="coursename">{school.course}</div>
               )}
-              <div className="date">{`${school.startDate} - ${school.endDate}`}</div>
+              <div className="date">
+                {school.startDate && school.endDate
+                  ? `${school.startDate} - ${school.endDate}`
+                  : school.startDate && !school.endDate
+                  ? school.startDate
+                  : !school.startDate && school.endDate
+                  ? school.endDate
+                  : ""}
+              </div>
             </div>
           );
         })}
@@ -90,14 +107,16 @@ function EducationSectn({ education }) {
 
 function SkillsSectn({ skill }) {
   return (
-    <section id="skills-sectn">
-      <h2>Skills</h2>
-      <ul id="skill-list">
-        {skill.skills.map((skillElem) => (
-          <li key={skillElem}>{skillElem}</li>
-        ))}
-      </ul>
-    </section>
+    skill.skills.length ? (
+      <section id="skills-sectn">
+        <h2>Skills</h2>
+        <ul id="skill-list">
+          {skill.skills.map((skillElem) => (
+            <li key={skillElem}>{skillElem}</li>
+          ))}
+        </ul>
+      </section>
+    ) : ""
   );
 }
 

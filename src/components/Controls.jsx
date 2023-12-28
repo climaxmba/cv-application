@@ -39,6 +39,7 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
             defaultValue={general.name}
             required
           />
+          <span className="validation-msg">This field is required</span>
         </div>
 
         <div>
@@ -51,6 +52,7 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
             defaultValue={general.mail}
             required
           />
+          <span className="validation-msg">Enter a valid email</span>
         </div>
 
         <div>
@@ -103,6 +105,7 @@ function EducationForm({
             placeholder="Ex: University of Cityname"
             required
           />
+          <span className="validation-msg">This field is required</span>
         </div>
 
         <div>
@@ -113,6 +116,7 @@ function EducationForm({
             id="edu-prgm"
             placeholder="Ex: BSc. Economics"
           />
+          <span className="validation-msg">This field is required</span>
         </div>
 
         <div>
@@ -123,6 +127,7 @@ function EducationForm({
             id="edu-url"
             placeholder="Ex: https://examplesite.com"
           />
+          <span className="validation-msg">A valid URL starts with https:// or http://</span>
         </div>
 
         <div>
@@ -227,6 +232,7 @@ function WorkExpForm({
             placeholder="Ex: Google LLC"
             required
           />
+          <span className="validation-msg">This field is required</span>
         </div>
 
         <div>
@@ -237,6 +243,7 @@ function WorkExpForm({
             id="comp-url"
             placeholder="Ex: https://google.com"
           />
+          <span className="validation-msg">A valid URL starts with https:// or http://</span>
         </div>
 
         <div>
@@ -248,6 +255,7 @@ function WorkExpForm({
             placeholder="Ex: Project Manager"
             required
           />
+          <span className="validation-msg">This field is required</span>
         </div>
 
         <div>
@@ -490,6 +498,7 @@ export default function Controls({
             list={sectionsInfo}
             setList={setSectionsInfo}
             animation={150}
+            delay={2}
           >
             {sectionsInfo.map((sectn) => (
               <SectionsList
@@ -567,6 +576,7 @@ function SectionsList({
           list={states.experience.experiences}
           setList={setExpList}
           animation={150}
+          delay={2}
         >
           {states.experience.experiences.map((exp) => (
             <li key={exp.id} className="nested-disp-list">
@@ -600,6 +610,7 @@ function SectionsList({
           list={states.education.schools}
           setList={setSchools}
           animation={150}
+          delay={2}
         >
           {states.education.schools.map((school) => (
             <li key={school.id} className="nested-disp-list">

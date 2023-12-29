@@ -530,6 +530,8 @@ export default function Controls({
                   setEducation,
                   skill,
                   setSkill,
+                  sectionsInfo,
+                  setSectionsInfo,
                   dispFormsOpen,
                 }}
               />
@@ -553,6 +555,48 @@ function SectionsList({
   }
   function setSchools(schoolsData) {
     states.setEducation({ ...states.education, schools: schoolsData });
+  }
+  function handleDelete(e) {
+    const section = e.currentTarget.getAttribute("data-sectn");
+
+    // Filter out the section to be deleted
+    states.setSectionsInfo(
+      states.sectionsInfo.filter((sectn) => sectn.section !== section)
+    );
+
+    // Reset all fields
+    if (section === "general") {
+      states.setGeneral({
+        ...states.general,
+        name: "",
+        mail: "",
+        phone: "",
+        socials: [],
+      });
+    } else if (section === "summary") {
+      states.setSummary({ ...states.summary, text: "" });
+    } else if (section === "education") {
+      states.setEducation({ ...states.education, schools: [] });
+    } else if (section === "experience") {
+      states.setExperience({ ...states.experience, experiences: [] });
+    } else if (section === "skills") {
+      states.setSkill({ ...states.skill, skills: [] });
+    } else {
+      // Nested lists
+      if (section === "experiences") {
+        const id = e.currentTarget.getAttribute("data-expid");
+        const experiences = [
+          ...states.experience.experiences.filter((exp) => exp.id !== id),
+        ];
+        states.setExperience({ ...states.experience, experiences });
+      } else if (section === "schools") {
+        const id = e.currentTarget.getAttribute("data-schoolid");
+        const schools = [
+          ...states.education.schools.filter((school) => school.id !== id),
+        ];
+        states.setEducation({ ...states.education, schools });
+      }
+    }
   }
 
   const hasNoContent =
@@ -589,6 +633,7 @@ function SectionsList({
           path={mdiTrashCanOutline}
           data-sectn={sectn.section}
           className="icons clickable"
+          onClick={handleDelete}
         />
       </div>
 
@@ -610,7 +655,7 @@ function SectionsList({
               <Icon
                 title="Edit"
                 path={mdiPencil}
-                data-sectn={sectn.section}
+                data-sectn={"experiences"}
                 data-expid={exp.id}
                 className="icons clickable"
                 onClick={handleEditClicked}
@@ -618,9 +663,10 @@ function SectionsList({
               <Icon
                 title="Delete"
                 path={mdiTrashCanOutline}
-                data-sectn={sectn.section}
+                data-sectn={"experiences"}
                 data-expid={exp.id}
                 className="icons clickable"
+                onClick={handleDelete}
               />
             </li>
           ))}
@@ -644,17 +690,18 @@ function SectionsList({
               <Icon
                 title="Edit"
                 path={mdiPencil}
-                data-sectn={sectn.section}
-                data-expid={school.id}
+                data-sectn={"schools"}
+                data-schoolid={school.id}
                 className="icons clickable"
                 onClick={handleEditClicked}
               />
               <Icon
                 title="Delete"
                 path={mdiTrashCanOutline}
-                data-sectn={sectn.section}
-                data-expid={school.id}
+                data-sectn={"schools"}
+                data-schoolid={school.id}
                 className="icons clickable"
+                onClick={handleDelete}
               />
             </li>
           ))}

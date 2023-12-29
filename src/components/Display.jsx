@@ -36,7 +36,7 @@ function SummarySectn({ summary }) {
 }
 
 function ExperienceSectn({ experience }) {
-  return (
+  return experience.experiences.length ? (
     <section id="experience-sectn">
       <h2>Experience</h2>
 
@@ -65,11 +65,11 @@ function ExperienceSectn({ experience }) {
         </div>
       ))}
     </section>
-  );
+  ) : "";
 }
 
 function EducationSectn({ education }) {
-  return (
+  return education.schools.length ? (
     <section id="education-sectn">
       <h2>Education</h2>
       <div id="educations">
@@ -102,7 +102,7 @@ function EducationSectn({ education }) {
         })}
       </div>
     </section>
-  );
+  ) : "";
 }
 
 function SkillsSectn({ skill }) {

@@ -401,6 +401,18 @@ export default function Controls({
     dispFormsOpenCopy.push({ section, list: [] });
     setDispFormsOpen(dispFormsOpenCopy);
   }
+  function updateSectionsList(sectn) {
+    // Push data if absent in sectionsInfo
+    if (!sectionsInfo.filter((sectnData) => sectnData.section === sectn).length) {
+      const sectionsInfoCopy = [...sectionsInfo];
+      sectionsInfoCopy.push({
+        isVisible: true,
+        section: sectn,
+        id: uuid(),
+      });
+      setSectionsInfo(sectionsInfoCopy);
+    }
+  }
 
   return (
     <div id="ctrls-contr">
@@ -455,7 +467,10 @@ export default function Controls({
                     <GeneralForm
                       key={form}
                       general={general}
-                      setGeneral={setGeneral}
+                      setGeneral={(data) => {
+                        updateSectionsList("general");
+                        setGeneral(data);
+                      }}
                       Form={Form}
                     />
                   );
@@ -464,7 +479,10 @@ export default function Controls({
                     <SummaryForm
                       key={form}
                       summary={summary}
-                      setSummary={setSummary}
+                      setSummary={(data) => {
+                        updateSectionsList("summary");
+                        setSummary(data);
+                      }}
                       Form={Form}
                     />
                   );
@@ -473,7 +491,10 @@ export default function Controls({
                     <SkillForm
                       key={form}
                       skill={skill}
-                      setSkill={setSkill}
+                      setSkill={(data) => {
+                        updateSectionsList("skills");
+                        setSkill(data);
+                      }}
                       Form={Form}
                     />
                   );
@@ -482,7 +503,10 @@ export default function Controls({
                     <WorkExpForm
                       key={form}
                       experience={experience}
-                      setExperience={setExperience}
+                      setExperience={(data) => {
+                        updateSectionsList("experience");
+                        setExperience(data);
+                      }}
                       Form={Form}
                     />
                   );
@@ -491,7 +515,10 @@ export default function Controls({
                     <EducationForm
                       key={form}
                       education={education}
-                      setEducation={setEducation}
+                      setEducation={(data) => {
+                        updateSectionsList("education");
+                        setEducation(data);
+                      }}
                       Form={Form}
                     />
                   );

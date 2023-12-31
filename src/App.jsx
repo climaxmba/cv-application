@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import sampleData from "./assets/sampleData.json";
 import "./styles/App.css";
 import { v1 as uuid } from "uuid";
 import Controls from "./components/Controls";

@@ -106,6 +106,9 @@ function EducationForm({
       setEducation(educationCopy);
     }
   }
+  const currData = id
+    ? education.schools.filter((exp) => exp.id === id)[0]
+    : null;
   return (
     <section id="edu-sectn">
       <h2>Education</h2>
@@ -120,6 +123,7 @@ function EducationForm({
             name="eduName"
             id="edu-name"
             placeholder="Ex: University of Cityname"
+            defaultValue={currData.schoolName}
             required
           />
           <span className="validation-msg">This field is required</span>
@@ -132,6 +136,7 @@ function EducationForm({
             name="eduPrgm"
             id="edu-prgm"
             placeholder="Ex: BSc. Economics"
+            defaultValue={currData.course}
           />
           <span className="validation-msg">This field is required</span>
         </div>
@@ -143,6 +148,7 @@ function EducationForm({
             name="eduUrl"
             id="edu-url"
             placeholder="Ex: https://examplesite.com"
+            defaultValue={currData.url}
           />
           <span className="validation-msg">
             A valid URL starts with https:// or http://
@@ -151,12 +157,12 @@ function EducationForm({
 
         <div>
           <label htmlFor="edu-sdate">Start Date:</label>
-          <input type="date" name="eduStartDate" id="edu-sdate" />
+          <input type="date" name="eduStartDate" id="edu-sdate" defaultValue={currData.startDate} />
         </div>
 
         <div>
           <label htmlFor="edu-edate">End Date:</label>
-          <input type="date" name="eduEndDate" id="edu-edate" />
+          <input type="date" name="eduEndDate" id="edu-edate" defaultValue={currData.endDate} />
         </div>
       </Form>
     </section>
@@ -200,6 +206,9 @@ function WorkExpForm({
       setExperience(experienceCopy);
     }
   }
+  const currData = id
+    ? experience.experiences.filter((exp) => exp.id === id)[0]
+    : null;
   return (
     <section id="job-sectn">
       <h2>Work Experience</h2>
@@ -212,6 +221,7 @@ function WorkExpForm({
           <input
             type="text"
             name="compName"
+            defaultValue={currData.company}
             id="job-comp"
             placeholder="Ex: Google LLC"
             required
@@ -226,6 +236,7 @@ function WorkExpForm({
             name="compUrl"
             id="comp-url"
             placeholder="Ex: https://google.com"
+            defaultValue={currData.url}
           />
           <span className="validation-msg">
             A valid URL starts with https:// or http://
@@ -240,18 +251,29 @@ function WorkExpForm({
             id="job-title"
             placeholder="Ex: Project Manager"
             required
+            defaultValue={currData.title}
           />
           <span className="validation-msg">This field is required</span>
         </div>
 
         <div>
           <label htmlFor="job-sdate">Start Date:</label>
-          <input type="date" name="jobStartDate" id="job-sdate" />
+          <input
+            type="date"
+            name="jobStartDate"
+            id="job-sdate"
+            defaultValue={currData.startDate}
+          />
         </div>
 
         <div>
           <label htmlFor="job-edate">End Date:</label>
-          <input type="date" name="jobEndDate" id="job-edate" />
+          <input
+            type="date"
+            name="jobEndDate"
+            id="job-edate"
+            defaultValue={currData.endDate}
+          />
         </div>
 
         <div>
@@ -365,7 +387,7 @@ function AddBtnsContr({ activeFormList, setActiveFormList }) {
   );
 }
 
-function SectionsList({ sectn, toggleVisibility, states }) {
+function SectionsList({ sectn, toggleVisibility, handleEditClicked, states }) {
   function setExpList(expData) {
     states.setExperience({ ...sectn.experience, experiences: expData });
   }
@@ -413,20 +435,6 @@ function SectionsList({ sectn, toggleVisibility, states }) {
         states.setEducation({ ...states.education, schools });
       }
     }
-  }
-  function handleEditClicked(e) {
-    const section = e.currentTarget.getAttribute("data-sectn");
-    const data = {
-      section,
-      id: e.currentTarget.getAttribute(
-        section === "experiences"
-          ? "data-expid"
-          : section === "schools"
-          ? "data-schoolid"
-          : null
-      ),
-    };
-    states.setDispFormEditing(data);
   }
 
   const hasNoContent =
@@ -570,7 +578,7 @@ export default function Controls({
           [...activeFormList].filter((elem) => elem !== formType)
         );
 
-        dispFormEditing && setDispFormEditing({});
+      dispFormEditing && setDispFormEditing({});
     }
 
     return (
@@ -595,10 +603,18 @@ export default function Controls({
     );
   }
   function handleEditClicked(e) {
-    setDispFormEditing({
-      section: e.currentTarget.getAttribute("data-sectn"),
-      id: e.currentTarget.getAttribute("data-sectnid"),
-    });
+    const section = e.currentTarget.getAttribute("data-sectn");
+    const data = {
+      section,
+      id: e.currentTarget.getAttribute(
+        section === "experiences"
+          ? "data-expid"
+          : section === "schools"
+          ? "data-schoolid"
+          : null
+      ),
+    };
+    setDispFormEditing(data);
   }
   function updateSectionsList(sectn) {
     // Push data if absent in sectionsInfo

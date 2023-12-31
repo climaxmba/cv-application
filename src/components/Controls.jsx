@@ -75,24 +75,36 @@ function EducationForm({
   setEducation,
   Form,
   isInActiveTab = true,
+  id = "",
 }) {
   function handleSubmit(e) {
-    const data = Object.fromEntries(new FormData(e.target));
-    const educationCopy = { ...education };
+    const formData = Object.fromEntries(new FormData(e.target));
+    const data = {
+      schoolName: formData.eduName,
+      course: formData.eduPrgm,
+      startDate: formData.eduStartDate
+        ? new Date(formData.eduStartDate).toDateString()
+        : null,
+      endDate: formData.eduEndDate
+        ? new Date(formData.eduEndDate).toDateString()
+        : null,
+      url: formData.eduUrl,
+      id: id || uuid(),
+    };
 
-    educationCopy.schools.push({
-      schoolName: data.eduName,
-      course: data.eduPrgm,
-      startDate: data.eduStartDate
-        ? new Date(data.eduStartDate).toDateString()
-        : null,
-      endDate: data.eduEndDate
-        ? new Date(data.eduEndDate).toDateString()
-        : null,
-      url: data.eduUrl,
-      id: uuid(),
-    });
-    setEducation(educationCopy);
+    // If id exists, then edit the data, else, add new data to the list
+    if (id) {
+      setEducation({
+        ...education,
+        schools: education.schools.map((school) =>
+          school.id === id ? data : school
+        ),
+      });
+    } else {
+      const educationCopy = { ...education };
+      educationCopy.schools.push(data);
+      setEducation(educationCopy);
+    }
   }
   return (
     <section id="edu-sectn">
@@ -151,81 +163,42 @@ function EducationForm({
   );
 }
 
-function SummaryForm({ summary, setSummary, Form, isInActiveTab = true }) {
-  function handleSubmit(e) {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-    setSummary({ ...summary, text: data.summary });
-  }
-  return (
-    <section id="summary-sectn">
-      <h2>Summary</h2>
-      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "summary" : null}>
-        <div>
-          <textarea
-            name="summary"
-            id="summary"
-            cols="30"
-            rows="10"
-            placeholder="Ex: Project Manager with over 5 years of experience..."
-            defaultValue={summary.text}
-          ></textarea>
-        </div>
-      </Form>
-    </section>
-  );
-}
-
-function SkillForm({ skill, setSkill, Form, isInActiveTab = true }) {
-  function handleSubmit(e) {
-    const data = Object.fromEntries(new FormData(e.target));
-    setSkill({ ...skill, skills: data.skills ? data.skills.split(", ") : [] });
-  }
-  return (
-    <section id="skill-sectn">
-      <h2>Skills</h2>
-      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "skill" : null}>
-        <div>
-          <label htmlFor="skills">
-            Enter your skills seperated by comma and space, &ldquo;, &rdquo;
-          </label>
-          <input
-            type="text"
-            name="skills"
-            id="skills"
-            placeholder="Ex: Algorithms, Collaboration"
-            defaultValue={skill.skills.join(", ")}
-          />
-        </div>
-      </Form>
-    </section>
-  );
-}
-
 function WorkExpForm({
   experience,
   setExperience,
   Form,
   isInActiveTab = true,
+  id = "",
 }) {
   function handleSubmit(e) {
-    const data = Object.fromEntries(new FormData(e.target));
-    const experienceCopy = { ...experience };
+    const formData = Object.fromEntries(new FormData(e.target));
+    const data = {
+      title: formData.jobTitle,
+      startDate: formData.eduStartDate
+        ? new Date(formData.eduStartDate).toDateString()
+        : null,
+      endDate: formData.eduEndDate
+        ? new Date(formData.eduEndDate).toDateString()
+        : null,
+      company: formData.compName,
+      jobDescription: formData.jobDescription,
+      url: formData.compUrl,
+      id: id || uuid(),
+    };
 
-    experienceCopy.experiences.push({
-      title: data.jobTitle,
-      startDate: data.eduStartDate
-        ? new Date(data.eduStartDate).toDateString()
-        : null,
-      endDate: data.eduEndDate
-        ? new Date(data.eduEndDate).toDateString()
-        : null,
-      company: data.compName,
-      jobDescription: data.jobDescription,
-      url: data.compUrl,
-      id: uuid(),
-    });
-    setExperience(experienceCopy);
+    // If id exists, then edit the data, else, add new data to the list
+    if (id) {
+      setExperience({
+        ...experience,
+        experiences: experience.experiences.map((exp) =>
+          exp.id === id ? data : exp
+        ),
+      });
+    } else {
+      const experienceCopy = { ...experience };
+      experienceCopy.experiences.push(data);
+      setExperience(experienceCopy);
+    }
   }
   return (
     <section id="job-sectn">
@@ -295,6 +268,57 @@ function WorkExpForm({
   );
 }
 
+function SummaryForm({ summary, setSummary, Form, isInActiveTab = true }) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+    setSummary({ ...summary, text: data.summary });
+  }
+  return (
+    <section id="summary-sectn">
+      <h2>Summary</h2>
+      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "summary" : null}>
+        <div>
+          <textarea
+            name="summary"
+            id="summary"
+            cols="30"
+            rows="10"
+            placeholder="Ex: Project Manager with over 5 years of experience..."
+            defaultValue={summary.text}
+          ></textarea>
+        </div>
+      </Form>
+    </section>
+  );
+}
+
+function SkillForm({ skill, setSkill, Form, isInActiveTab = true }) {
+  function handleSubmit(e) {
+    const data = Object.fromEntries(new FormData(e.target));
+    setSkill({ ...skill, skills: data.skills ? data.skills.split(", ") : [] });
+  }
+  return (
+    <section id="skill-sectn">
+      <h2>Skills</h2>
+      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "skill" : null}>
+        <div>
+          <label htmlFor="skills">
+            Enter your skills seperated by comma and space, &ldquo;, &rdquo;
+          </label>
+          <input
+            type="text"
+            name="skills"
+            id="skills"
+            placeholder="Ex: Algorithms, Collaboration"
+            defaultValue={skill.skills.join(", ")}
+          />
+        </div>
+      </Form>
+    </section>
+  );
+}
+
 function ActiveForms({ children }) {
   return <div id="active-form-contr">{children}</div>;
 }
@@ -341,6 +365,184 @@ function AddBtnsContr({ activeFormList, setActiveFormList }) {
   );
 }
 
+function SectionsList({ sectn, toggleVisibility, states }) {
+  function setExpList(expData) {
+    states.setExperience({ ...sectn.experience, experiences: expData });
+  }
+  function setSchools(schoolsData) {
+    states.setEducation({ ...states.education, schools: schoolsData });
+  }
+  function handleDelete(e) {
+    const section = e.currentTarget.getAttribute("data-sectn");
+
+    // Filter out the section to be deleted
+    states.setSectionsInfo(
+      states.sectionsInfo.filter((sectn) => sectn.section !== section)
+    );
+
+    // Reset all fields
+    if (section === "general") {
+      states.setGeneral({
+        ...states.general,
+        name: "",
+        mail: "",
+        phone: "",
+        socials: [],
+      });
+    } else if (section === "summary") {
+      states.setSummary({ ...states.summary, text: "" });
+    } else if (section === "education") {
+      states.setEducation({ ...states.education, schools: [] });
+    } else if (section === "experience") {
+      states.setExperience({ ...states.experience, experiences: [] });
+    } else if (section === "skills") {
+      states.setSkill({ ...states.skill, skills: [] });
+    } else {
+      // Nested lists
+      if (section === "experiences") {
+        const id = e.currentTarget.getAttribute("data-expid");
+        const experiences = [
+          ...states.experience.experiences.filter((exp) => exp.id !== id),
+        ];
+        states.setExperience({ ...states.experience, experiences });
+      } else if (section === "schools") {
+        const id = e.currentTarget.getAttribute("data-schoolid");
+        const schools = [
+          ...states.education.schools.filter((school) => school.id !== id),
+        ];
+        states.setEducation({ ...states.education, schools });
+      }
+    }
+  }
+  function handleEditClicked(e) {
+    const section = e.currentTarget.getAttribute("data-sectn");
+    const data = {
+      section,
+      id: e.currentTarget.getAttribute(
+        section === "experiences"
+          ? "data-expid"
+          : section === "schools"
+          ? "data-schoolid"
+          : null
+      ),
+    };
+    states.setDispFormEditing(data);
+  }
+
+  const hasNoContent =
+    (sectn.section === "general" && !states.general.name) ||
+    (sectn.section === "summary" && !states.summary.text) ||
+    (sectn.section === "education" && !states.education.schools.length) ||
+    (sectn.section === "experience" && !states.experience.experiences.length) ||
+    (sectn.section === "skills" && !states.skill.skills.length);
+
+  return (
+    <li
+      className={`movable ${hasNoContent && "nocontent-item"}`}
+      title={hasNoContent ? "This section has no content for preview" : ""}
+    >
+      <div className="disp-list-itms">
+        <Icon title="Drag" path={mdiDragVertical} className="icons" />
+        <Icon
+          title="Toggle Visibility"
+          path={sectn.isVisible ? mdiEye : mdiEyeOff}
+          data-sectn={sectn.section}
+          className="icons clickable"
+          onClick={toggleVisibility}
+        />
+        <div className="section-names">{sectn.section}</div>
+        {sectn.section !== "education" && sectn.section !== "experience" && (
+          <Icon
+            title="Edit Section"
+            path={mdiPencil}
+            data-sectn={sectn.section}
+            className="icons clickable"
+            onClick={handleEditClicked}
+          />
+        )}
+        <Icon
+          title="Delete Section"
+          path={mdiTrashCanOutline}
+          data-sectn={sectn.section}
+          className="icons clickable"
+          onClick={handleDelete}
+        />
+      </div>
+
+      {sectn.section === "experience" && (
+        <ReactSortable
+          tag={"ul"}
+          id="nested-list-contr"
+          list={states.experience.experiences}
+          setList={setExpList}
+          animation={150}
+          delay={2}
+        >
+          {states.experience.experiences.map((exp) => (
+            <li key={exp.id} className="nested-disp-list">
+              <Icon title="Drag" path={mdiDragVertical} className="icons" />
+              <div className="nested-sectn-names">
+                {exp.title} - {exp.company}
+              </div>
+              <Icon
+                title="Edit"
+                path={mdiPencil}
+                data-sectn={"experiences"}
+                data-expid={exp.id}
+                className="icons clickable"
+                onClick={handleEditClicked}
+              />
+              <Icon
+                title="Delete"
+                path={mdiTrashCanOutline}
+                data-sectn={"experiences"}
+                data-expid={exp.id}
+                className="icons clickable"
+                onClick={handleDelete}
+              />
+            </li>
+          ))}
+        </ReactSortable>
+      )}
+      {sectn.section === "education" && (
+        <ReactSortable
+          tag={"ul"}
+          id="nested-list-contr"
+          list={states.education.schools}
+          setList={setSchools}
+          animation={150}
+          delay={2}
+        >
+          {states.education.schools.map((school) => (
+            <li key={school.id} className="nested-disp-list">
+              <Icon title="Drag" path={mdiDragVertical} className="icons" />
+              <div className="nested-sectn-names">
+                {school.course} - {school.schoolName}
+              </div>
+              <Icon
+                title="Edit"
+                path={mdiPencil}
+                data-sectn={"schools"}
+                data-schoolid={school.id}
+                className="icons clickable"
+                onClick={handleEditClicked}
+              />
+              <Icon
+                title="Delete"
+                path={mdiTrashCanOutline}
+                data-sectn={"schools"}
+                data-schoolid={school.id}
+                className="icons clickable"
+                onClick={handleDelete}
+              />
+            </li>
+          ))}
+        </ReactSortable>
+      )}
+    </li>
+  );
+}
+
 export default function Controls({
   general,
   setGeneral,
@@ -356,14 +558,8 @@ export default function Controls({
   setSectionsInfo,
 }) {
   const [activeTab, setActiveTab] = useState("frms-tab");
-  const [activeFormList, setActiveFormList] = useState([
-    "general",
-    "skill",
-    "summary",
-  ]);
-  const [dispFormsOpen, setDispFormsOpen] = useState([
-    { section: "general", list: [] },
-  ]);
+  const [activeFormList, setActiveFormList] = useState(["general"]);
+  const [dispFormEditing, setDispFormEditing] = useState({});
 
   function Form({ children, submitTxt = "Save", onSubmit, formType }) {
     function handleOnSubmit(e) {
@@ -373,6 +569,8 @@ export default function Controls({
         setActiveFormList(
           [...activeFormList].filter((elem) => elem !== formType)
         );
+
+        dispFormEditing && setDispFormEditing({});
     }
 
     return (
@@ -397,10 +595,10 @@ export default function Controls({
     );
   }
   function handleEditClicked(e) {
-    const section = e.currentTarget.getAttribute("data-sectn"),
-      dispFormsOpenCopy = [...dispFormsOpen];
-    dispFormsOpenCopy.push({ section, list: [] });
-    setDispFormsOpen(dispFormsOpenCopy);
+    setDispFormEditing({
+      section: e.currentTarget.getAttribute("data-sectn"),
+      id: e.currentTarget.getAttribute("data-sectnid"),
+    });
   }
   function updateSectionsList(sectn) {
     // Push data if absent in sectionsInfo
@@ -446,7 +644,12 @@ export default function Controls({
           <>
             <input type="radio" id="frms-tab" name="active-tab" />
             <input type="radio" id="disp-tab" name="active-tab" />
-            <input type="radio" id="null-tab" name="active-tab" defaultChecked />
+            <input
+              type="radio"
+              id="null-tab"
+              name="active-tab"
+              defaultChecked
+            />
           </>
         )}
 
@@ -550,6 +753,46 @@ export default function Controls({
           />
         </div>
         <div id="disp">
+          {dispFormEditing.section === "general" ? (
+            <GeneralForm
+              general={general}
+              setGeneral={setGeneral}
+              Form={Form}
+              isInActiveTab={false}
+            />
+          ) : dispFormEditing.section === "summary" ? (
+            <SummaryForm
+              summary={summary}
+              setSummary={setSummary}
+              Form={Form}
+              isInActiveTab={false}
+            />
+          ) : dispFormEditing.section === "skills" ? (
+            <SkillForm
+              skill={skill}
+              setSkill={setSkill}
+              Form={Form}
+              isInActiveTab={false}
+            />
+          ) : dispFormEditing.section === "experiences" ? (
+            <WorkExpForm
+              experience={experience}
+              setExperience={setExperience}
+              Form={Form}
+              isInActiveTab={false}
+              id={dispFormEditing.id}
+            />
+          ) : (
+            dispFormEditing.section === "schools" && (
+              <EducationForm
+                education={education}
+                setEducation={setEducation}
+                Form={Form}
+                isInActiveTab={false}
+                id={dispFormEditing.id}
+              />
+            )
+          )}
           <ReactSortable
             tag={"ul"}
             id="sectn-order-contr"
@@ -562,7 +805,6 @@ export default function Controls({
               <SectionsList
                 key={sectn.id}
                 sectn={sectn}
-                Form={Form}
                 toggleVisibility={toggleVisibility}
                 handleEditClicked={handleEditClicked}
                 states={{
@@ -578,7 +820,7 @@ export default function Controls({
                   setSkill,
                   sectionsInfo,
                   setSectionsInfo,
-                  dispFormsOpen,
+                  setDispFormEditing,
                 }}
               />
             ))}
@@ -586,198 +828,5 @@ export default function Controls({
         </div>
       </div>
     </div>
-  );
-}
-
-function SectionsList({
-  sectn,
-  // Form,
-  toggleVisibility,
-  handleEditClicked,
-  states,
-}) {
-  function setExpList(expData) {
-    states.setExperience({ ...sectn.experience, experiences: expData });
-  }
-  function setSchools(schoolsData) {
-    states.setEducation({ ...states.education, schools: schoolsData });
-  }
-  function handleDelete(e) {
-    const section = e.currentTarget.getAttribute("data-sectn");
-
-    // Filter out the section to be deleted
-    states.setSectionsInfo(
-      states.sectionsInfo.filter((sectn) => sectn.section !== section)
-    );
-
-    // Reset all fields
-    if (section === "general") {
-      states.setGeneral({
-        ...states.general,
-        name: "",
-        mail: "",
-        phone: "",
-        socials: [],
-      });
-    } else if (section === "summary") {
-      states.setSummary({ ...states.summary, text: "" });
-    } else if (section === "education") {
-      states.setEducation({ ...states.education, schools: [] });
-    } else if (section === "experience") {
-      states.setExperience({ ...states.experience, experiences: [] });
-    } else if (section === "skills") {
-      states.setSkill({ ...states.skill, skills: [] });
-    } else {
-      // Nested lists
-      if (section === "experiences") {
-        const id = e.currentTarget.getAttribute("data-expid");
-        const experiences = [
-          ...states.experience.experiences.filter((exp) => exp.id !== id),
-        ];
-        states.setExperience({ ...states.experience, experiences });
-      } else if (section === "schools") {
-        const id = e.currentTarget.getAttribute("data-schoolid");
-        const schools = [
-          ...states.education.schools.filter((school) => school.id !== id),
-        ];
-        states.setEducation({ ...states.education, schools });
-      }
-    }
-  }
-
-  const hasNoContent =
-    (sectn.section === "general" && !states.general.name) ||
-    (sectn.section === "summary" && !states.summary.text) ||
-    (sectn.section === "education" && !states.education.schools.length) ||
-    (sectn.section === "experience" && !states.experience.experiences.length) ||
-    (sectn.section === "skills" && !states.skill.skills.length);
-
-  return (
-    <li
-      className={`movable ${hasNoContent && "nocontent-item"}`}
-      title={hasNoContent ? "This section has no content for preview" : ""}
-    >
-      <div className="disp-list-itms">
-        <Icon title="Drag" path={mdiDragVertical} className="icons" />
-        <Icon
-          title="Toggle Visibility"
-          path={sectn.isVisible ? mdiEye : mdiEyeOff}
-          data-sectn={sectn.section}
-          className="icons clickable"
-          onClick={toggleVisibility}
-        />
-        <div className="section-names">{sectn.section}</div>
-        <Icon
-          title="Edit Section"
-          path={mdiPencil}
-          data-sectn={sectn.section}
-          className="icons clickable"
-          onClick={handleEditClicked}
-        />
-        <Icon
-          title="Delete Section"
-          path={mdiTrashCanOutline}
-          data-sectn={sectn.section}
-          className="icons clickable"
-          onClick={handleDelete}
-        />
-      </div>
-
-      {sectn.section === "experience" && (
-        <ReactSortable
-          tag={"ul"}
-          id="nested-list-contr"
-          list={states.experience.experiences}
-          setList={setExpList}
-          animation={150}
-          delay={2}
-        >
-          {states.experience.experiences.map((exp) => (
-            <li key={exp.id} className="nested-disp-list">
-              <Icon title="Drag" path={mdiDragVertical} className="icons" />
-              <div className="nested-sectn-names">
-                {exp.title} - {exp.company}
-              </div>
-              <Icon
-                title="Edit"
-                path={mdiPencil}
-                data-sectn={"experiences"}
-                data-expid={exp.id}
-                className="icons clickable"
-                onClick={handleEditClicked}
-              />
-              <Icon
-                title="Delete"
-                path={mdiTrashCanOutline}
-                data-sectn={"experiences"}
-                data-expid={exp.id}
-                className="icons clickable"
-                onClick={handleDelete}
-              />
-            </li>
-          ))}
-        </ReactSortable>
-      )}
-      {sectn.section === "education" && (
-        <ReactSortable
-          tag={"ul"}
-          id="nested-list-contr"
-          list={states.education.schools}
-          setList={setSchools}
-          animation={150}
-          delay={2}
-        >
-          {states.education.schools.map((school) => (
-            <li key={school.id} className="nested-disp-list">
-              <Icon title="Drag" path={mdiDragVertical} className="icons" />
-              <div className="nested-sectn-names">
-                {school.course} - {school.schoolName}
-              </div>
-              <Icon
-                title="Edit"
-                path={mdiPencil}
-                data-sectn={"schools"}
-                data-schoolid={school.id}
-                className="icons clickable"
-                onClick={handleEditClicked}
-              />
-              <Icon
-                title="Delete"
-                path={mdiTrashCanOutline}
-                data-sectn={"schools"}
-                data-schoolid={school.id}
-                className="icons clickable"
-                onClick={handleDelete}
-              />
-            </li>
-          ))}
-        </ReactSortable>
-      )}
-
-      {/* {states.dispFormsOpen.map((item) =>
-        item.section === sectn.section ? (
-          <>
-            {sectn.section === "general" && (
-              <GeneralForm
-                key={states.general.id}
-                general={states.general}
-                setGeneral={states.setGeneral}
-                Form={Form}
-                isInActiveTab={false}
-              />
-            )}
-            {sectn.section === "summary" && (
-              <SummaryForm
-                key={states.summary.id}
-                summary={states.summary}
-                setSummary={states.setSummary}
-                Form={Form}
-                isInActiveTab={false}
-              />
-            )}
-          </>
-        ) : null
-      )} */}
-    </li>
   );
 }

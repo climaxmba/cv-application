@@ -20,7 +20,8 @@ svg.icons {
   font-size: small;
   padding: 0.2rem;
 }
-input:invalid ~ .validation-msg {
+
+input:invalid~.validation-msg {
   display: block;
 }
 
@@ -35,11 +36,35 @@ input:invalid ~ .validation-msg {
   gap: 0.5rem;
 }
 
-.panneled-div > *:first-child {
+.panneled-div>*:first-child {
   flex: 1 0 320px;
 }
-.panneled-div > *:last-child {
+
+.panneled-div>*:last-child {
   flex: 1 1 8.5in;
+}
+
+.print-btn {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 3px 4px 3px #00000030;
+  border: none;
+  height: 6rem;
+  width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: royalblue;
+}
+.print-btn:hover {
+  background-color: #395bc1;
+}
+.print-btn:active {
+  background-color: white;
+  color: royalblue;
 }
 
 @page {
@@ -48,7 +73,8 @@ input:invalid ~ .validation-msg {
 }
 
 @media print {
-  .panneled-div > *:first-child {
+  .panneled-div>*:first-child,
+  .print-btn {
     display: none !important;
   }
 

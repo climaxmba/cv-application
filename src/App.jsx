@@ -4,7 +4,7 @@ import "./styles/App.css";
 import { v1 as uuid } from "uuid";
 import Controls from "./components/Controls";
 import Display from "./components/Display";
-import { PanneledDiv } from "./components/utils";
+import { PanneledDiv, PrintButton } from "./components/utils";
 
 const generalData = {
   id: uuid(),
@@ -145,6 +145,7 @@ function App() {
           sectionsInfo={sectionsInfo}
         />
       </PanneledDiv>
+      <PrintButton></PrintButton>
     </>
   );
 }

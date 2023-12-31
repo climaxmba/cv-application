@@ -58,6 +58,15 @@
     color: royalblue;
     fill: royalblue;
   }
+
+  .print-btn {
+    height: 4rem;
+    width: 4rem;
+    font-size: small;
+  }
+  .print-btn svg {
+    width: 1.5rem;
+  }
 }
 
 @media (width < 450px) {

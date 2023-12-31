@@ -6,8 +6,8 @@
   background-color: white;
   padding: 1rem 2.5rem;
   margin: 1rem;
-  border: 0.3rem solid royalblue;
-  min-height: 842px;
+  border: 0.3rem solid #747bff;
+  min-height: 11in;
 }
 
 #cv-disp section:not(#general-sectn) > div {
@@ -21,7 +21,7 @@
 
 #cv-disp h2,
 #cv-disp h3:not(.schoolname) {
-  margin-bottom: 0.3rem;
+  margin: 0.2rem 0;
 }
 #cv-disp p {
   margin: 0.8rem 0;
@@ -30,6 +30,10 @@
 #contact-contr {
   display: flex;
   justify-content: space-between;
+}
+
+#summary-sectn p {
+  padding-left: 2rem;
 }
 
 p.jobdetails {
@@ -54,6 +58,7 @@ p.jobdetails {
 }
 
 #skill-list {
+  margin: 0.3rem 0;
   padding-left: 2rem;
   list-style: none;
   display: flex;

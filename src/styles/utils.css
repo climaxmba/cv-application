@@ -18,11 +18,7 @@ svg.icons {
 .validation-msg {
   display: none;
   font-size: small;
-  font-weight: 500;
-  padding: 3px 0.8rem;
-  background-color: white;
-  color: black;
-  border-radius: 0 0 0.3rem 0.3rem;
+  padding: 0.2rem;
 }
 input:invalid ~ .validation-msg {
   display: block;
@@ -46,13 +42,22 @@ input:invalid ~ .validation-msg {
   flex: 1 1 8.5in;
 }
 
+@page {
+  size: A4;
+  margin: 1rem;
+}
+
 @media print {
   .panneled-div > *:first-child {
     display: none !important;
   }
 
   #cv-disp {
-    min-height: 842px;
-    min-width: 595px;
+    border: none;
+    padding: 0;
+
+    & h2 {
+      margin: 0.2rem;
+    }
   }
 }

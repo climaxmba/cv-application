@@ -8,6 +8,7 @@ import Icon from "@mdi/react";
 import {
   mdiPlusThick,
   mdiCog,
+  mdiPrinterEye,
   mdiDragVertical,
   mdiEye,
   mdiEyeOff,
@@ -403,7 +404,9 @@ export default function Controls({
   }
   function updateSectionsList(sectn) {
     // Push data if absent in sectionsInfo
-    if (!sectionsInfo.filter((sectnData) => sectnData.section === sectn).length) {
+    if (
+      !sectionsInfo.filter((sectnData) => sectnData.section === sectn).length
+    ) {
       const sectionsInfoCopy = [...sectionsInfo];
       sectionsInfoCopy.push({
         isVisible: true,
@@ -426,8 +429,9 @@ export default function Controls({
               defaultChecked
             />
             <input type="radio" id="disp-tab" name="active-tab" />
+            <input type="radio" id="null-tab" name="active-tab" />
           </>
-        ) : (
+        ) : activeTab === "disp-tab" ? (
           <>
             <input type="radio" id="frms-tab" name="active-tab" />
             <input
@@ -436,6 +440,13 @@ export default function Controls({
               name="active-tab"
               defaultChecked
             />
+            <input type="radio" id="null-tab" name="active-tab" />
+          </>
+        ) : (
+          <>
+            <input type="radio" id="frms-tab" name="active-tab" />
+            <input type="radio" id="disp-tab" name="active-tab" />
+            <input type="radio" id="null-tab" name="active-tab" defaultChecked />
           </>
         )}
 
@@ -455,6 +466,14 @@ export default function Controls({
           >
             <Icon path={mdiCog} className="icons" />
             Sections
+          </label>
+          <label
+            htmlFor="null-tab"
+            className="clickable text-with-icons"
+            onClick={handleTabChange}
+          >
+            <Icon path={mdiPrinterEye} className="icons" />
+            Preview
           </label>
         </div>
 

@@ -16,11 +16,11 @@ input[name="active-tab"] {
 input[name="active-tab"]~.tabs-contr label {
   border-bottom: 2px solid;
   border-color: transparent;
-  /* transition: border-color 0.35s ease-in; */
 }
 
 input#frms-tab:checked~.tabs-contr label[for="frms-tab"],
-input#disp-tab:checked~.tabs-contr label[for="disp-tab"] {
+input#disp-tab:checked~.tabs-contr label[for="disp-tab"],
+input#null-tab:checked~.tabs-contr label[for="null-tab"] {
   border-color: royalblue;
 }
 
@@ -36,12 +36,14 @@ input#disp-tab:checked~#disp {
 
 .tabs-contr {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 5px 3rem;
 }
 
 .tabs-contr label {
   padding-bottom: 5px;
+  transition: color 0.25s ease-in-out;
 }
 
 form {
@@ -142,4 +144,10 @@ button[type="submit"]:hover {
 #nested-list-contr {
   padding: 0.4rem;
   gap: 0.4rem;
+}
+
+@media (width > 930px) {
+  label[for="null-tab"] {
+    display: none;
+  }
 }

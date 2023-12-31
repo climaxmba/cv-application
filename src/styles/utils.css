@@ -44,7 +44,7 @@ input:invalid ~ .validation-msg {
 
 @page {
   size: A4;
-  margin: 1rem;
+  margin: 1rem 1.5rem;
 }
 
 @media print {
@@ -55,6 +55,7 @@ input:invalid ~ .validation-msg {
   #cv-disp {
     border: none;
     padding: 0;
+    margin: 0 !important;
 
     & h2 {
       margin: 0.2rem;

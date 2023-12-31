@@ -60,7 +60,7 @@ button:focus-visible {
     color: white;
     background-color: #2b2b2b;
   }
-  .tabs-contr, #tabs {
+  .tabs-contr, #tabs, #ctrls-contr {
     background-color: #efefef;
   }
 }

@@ -12,10 +12,6 @@
     flex-direction: column;
   }
 
-  .tabs-contr {
-    gap: 0.8rem;
-  }
-
   #tabs {
     align-self: center;
   }
@@ -33,8 +29,13 @@
     margin-top: 6rem;
   }
 
-  #disp, #frms {
-    margin: 0 1rem;
+  #frms {
+    width: 320px;
+  }
+
+  #disp,
+  #frms {
+    margin: 0 auto;
     padding-bottom: 3rem;
     height: calc(100vh - 6rem);
     overflow-y: scroll;
@@ -64,12 +65,16 @@
     width: 4rem;
     font-size: small;
   }
+
   .print-btn svg {
     width: 1.5rem;
   }
 }
 
 @media (width < 450px) {
+  .tabs-contr {
+    gap: 2rem;
+  }
   .tabs-contr .text-with-icons {
     flex-direction: column;
     align-items: center;

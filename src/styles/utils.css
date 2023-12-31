@@ -48,7 +48,7 @@ input:invalid~.validation-msg {
   position: fixed;
   right: 0;
   bottom: 0;
-  margin: 1rem;
+  margin: 2rem;
   border-radius: 50%;
   box-shadow: 0 3px 4px 3px #00000030;
   border: none;
@@ -59,12 +59,30 @@ input:invalid~.validation-msg {
   justify-content: center;
   background-color: royalblue;
 }
+
 .print-btn:hover {
   background-color: #395bc1;
 }
+
 .print-btn:active {
   background-color: white;
   color: royalblue;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00000040;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00000060;
 }
 
 @page {
@@ -73,6 +91,7 @@ input:invalid~.validation-msg {
 }
 
 @media print {
+
   .panneled-div>*:first-child,
   .print-btn {
     display: none !important;

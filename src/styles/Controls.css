@@ -37,7 +37,7 @@ input#disp-tab:checked~#disp {
 .tabs-contr {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 5px 3rem;
 }
 
@@ -93,6 +93,8 @@ textarea:focus-visible {
   border-top: 2px dotted;
   padding-top: 2rem;
   margin-top: 2rem;
+  margin-right: 1rem;
+  margin-right: 1rem;
   display: flex;
   gap: 1rem;
   flex-direction: column;

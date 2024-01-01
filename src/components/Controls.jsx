@@ -59,11 +59,13 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
         <div>
           <label htmlFor="person-phone">Phone Number:</label>
           <input
-            type="number"
+            type="tel"
             name="personPhone"
             id="person-phone"
+            pattern="^(\+{0,1})[\-0-9 ]*$"
             defaultValue={general.phone}
           />
+          <span className="validation-msg">Enter a phone number</span>
         </div>
       </Form>
     </section>

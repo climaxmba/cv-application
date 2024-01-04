@@ -7,7 +7,6 @@
   padding: 1rem 2.5rem;
   margin: 1rem;
   border: 0.3rem solid #747bff;
-  min-height: 11in;
 }
 
 #cv-disp section:not(#general-sectn) > div {
@@ -34,6 +33,7 @@
 
 #summary-sectn p {
   padding-left: 2rem;
+  white-space: pre-wrap;
 }
 
 p.jobdetails {
@@ -47,7 +47,6 @@ p.jobdetails {
   display: grid;
   gap: 1rem 0.5rem;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 1fr;
 }
 .schoolname {
   font-weight: bold;

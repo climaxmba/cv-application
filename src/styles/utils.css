@@ -96,6 +96,9 @@ input:invalid~.validation-msg {
 }
 
 @media print {
+  * {
+    background-color: white !important;
+  }
 
   .panneled-div>*:first-child,
   .print-btn {

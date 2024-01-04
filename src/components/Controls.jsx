@@ -59,7 +59,7 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
             type="tel"
             name="personPhone"
             id="person-phone"
-            pattern="^(\+{0,1})[\-0-9 ]*$"
+            pattern="^(\+?)[\-0-9 ]{8,15}$"
             defaultValue={general.phone}
           />
           <span className="validation-msg">Enter a phone number</span>

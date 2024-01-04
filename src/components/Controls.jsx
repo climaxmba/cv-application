@@ -108,6 +108,7 @@ function EducationForm({
   const currData = id
     ? education.schools.filter((exp) => exp.id === id)[0]
     : null;
+    
   return (
     <section id="edu-sectn">
       <h2>Education</h2>
@@ -396,7 +397,7 @@ function AddBtnsContr({ activeFormList, setActiveFormList }) {
   );
 }
 
-function SectionsList({ sectn, toggleVisibility, handleEditClicked, states }) {
+function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }) {
   function setExpList(expData) {
     states.setExperience({ ...sectn.experience, experiences: expData });
   }
@@ -829,7 +830,7 @@ export default function Controls({
             group="main"
           >
             {sectionsInfo.map((sectn) => (
-              <SectionsList
+              <SectionsListItem
                 key={sectn.id}
                 sectn={sectn}
                 toggleVisibility={toggleVisibility}

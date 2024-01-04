@@ -85,6 +85,11 @@ input:invalid~.validation-msg {
   background: #00000060;
 }
 
+.drag-ghost {
+  opacity: 0.8;
+  background-color: #4169e180;
+}
+
 @page {
   size: A4;
   margin: 1rem 1.5rem;

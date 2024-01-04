@@ -493,9 +493,11 @@ function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }
           id="nested-list-contr"
           list={states.experience.experiences}
           setList={setExpList}
-          animation={200}
-          delay={1.5}
+          animation={300}
+          delay={0.001}
+          swapThreshold={0.5}
           group="exp"
+          ghostClass="drag-ghost"
         >
           {states.experience.experiences.map((exp) => (
             <li key={exp.id} className="nested-disp-list">
@@ -529,9 +531,11 @@ function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }
           id="nested-list-contr"
           list={states.education.schools}
           setList={setSchools}
-          animation={200}
-          delay={1.5}
+          animation={300}
+          delay={0.001}
+          swapThreshold={0.5}
           group="edu"
+          ghostClass="drag-ghost"
         >
           {states.education.schools.map((school) => (
             <li key={school.id} className="nested-disp-list">
@@ -826,9 +830,11 @@ export default function Controls({
             id="sectn-order-contr"
             list={sectionsInfo}
             setList={setSectionsInfo}
-            animation={200}
-            delay={1.5}
+            animation={300}
+            delay={0.001}
+            swapThreshold={0.5}
             group="main"
+            ghostClass="drag-ghost"
           >
             {sectionsInfo.map((sectn) => (
               <SectionsListItem

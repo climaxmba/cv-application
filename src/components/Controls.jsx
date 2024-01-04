@@ -107,7 +107,7 @@ function EducationForm({
   }
   const currData = id
     ? education.schools.filter((exp) => exp.id === id)[0]
-    : null;
+    : {};
     
   return (
     <section id="edu-sectn">
@@ -137,6 +137,7 @@ function EducationForm({
             id="edu-prgm"
             placeholder="Ex: BSc. Economics"
             defaultValue={currData.course}
+            required
           />
           <span className="validation-msg">This field is required</span>
         </div>
@@ -218,7 +219,8 @@ function WorkExpForm({
   }
   const currData = id
     ? experience.experiences.filter((exp) => exp.id === id)[0]
-    : null;
+    : {};
+
   return (
     <section id="job-sectn">
       <h2>Work Experience</h2>

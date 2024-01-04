@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { v1 as uuid } from "uuid";
-
-// import sampleData from "../assets/sampleData.json";
-
 import Icon from "@mdi/react";
 import {
   mdiPlusThick,
@@ -159,12 +156,22 @@ function EducationForm({
 
         <div>
           <label htmlFor="edu-sdate">Start Date:</label>
-          <input type="date" name="eduStartDate" id="edu-sdate" defaultValue={currData.startDate} />
+          <input
+            type="date"
+            name="eduStartDate"
+            id="edu-sdate"
+            defaultValue={currData.startDate}
+          />
         </div>
 
         <div>
           <label htmlFor="edu-edate">End Date:</label>
-          <input type="date" name="eduEndDate" id="edu-edate" defaultValue={currData.endDate} />
+          <input
+            type="date"
+            name="eduEndDate"
+            id="edu-edate"
+            defaultValue={currData.endDate}
+          />
         </div>
       </Form>
     </section>
@@ -487,6 +494,7 @@ function SectionsList({ sectn, toggleVisibility, handleEditClicked, states }) {
           setList={setExpList}
           animation={150}
           delay={2}
+          group="nested"
         >
           {states.experience.experiences.map((exp) => (
             <li key={exp.id} className="nested-disp-list">
@@ -818,6 +826,7 @@ export default function Controls({
             setList={setSectionsInfo}
             animation={150}
             delay={2}
+            group="main"
           >
             {sectionsInfo.map((sectn) => (
               <SectionsList

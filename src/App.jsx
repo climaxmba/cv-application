@@ -10,20 +10,11 @@ const generalData = {
   name: "Andrew Stone",
   mail: "andrewstone@not-real-people.com",
   phone: "555-555-555",
-  socials: [
-    {
-      platform: "LinkedIn",
-      url: "",
-    },
-    {
-      platform: "GitHub",
-      url: "",
-    },
-    {
-      platform: "Facebook",
-      url: "",
-    },
-  ],
+};
+
+const socialsData = {
+  id: uuid(),
+  urls: ["https://www.linkedin.com"],
 };
 
 const summaryData = {
@@ -90,6 +81,11 @@ const sectionsInfoData = [
   },
   {
     isVisible: true,
+    section: "socials",
+    id: uuid(),
+  },
+  {
+    isVisible: true,
     section: "summary",
     id: uuid(),
   },
@@ -112,6 +108,7 @@ const sectionsInfoData = [
 
 function App() {
   const [general, setGeneral] = useState(generalData);
+  const [socials, setSocials] = useState(socialsData);
   const [summary, setSummary] = useState(summaryData);
   const [education, setEducation] = useState(educationData);
   const [experience, setExperience] = useState(experienceData);
@@ -124,6 +121,8 @@ function App() {
         <Controls
           general={general}
           setGeneral={setGeneral}
+          socials={socials}
+          setSocials={setSocials}
           summary={summary}
           setSummary={setSummary}
           education={education}
@@ -137,6 +136,7 @@ function App() {
         />
         <Display
           general={general}
+          socials={socials}
           summary={summary}
           education={education}
           experience={experience}
@@ -144,7 +144,7 @@ function App() {
           sectionsInfo={sectionsInfo}
         />
       </PanneledDiv>
-      <PrintButton></PrintButton>
+      <PrintButton />
     </>
   );
 }

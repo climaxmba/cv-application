@@ -69,6 +69,39 @@ function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
   );
 }
 
+function SocialsForm({ socials, setSocials, Form, isInActiveTab = true }) {
+  function handleSubmit(e) {
+    const data = Object.fromEntries(new FormData(e.target));
+    setSocials({
+      ...socials,
+      urls: data.socialUrls ? data.socialUrls.split("\n") : [],
+    });
+  }
+  return (
+    <section id="skill-sectn">
+      <h2>Set Socials</h2>
+      <Form onSubmit={handleSubmit} formType={isInActiveTab ? "socials" : null}>
+        <div>
+          <label htmlFor="social-urls">
+            Enter your social links seperated by paragraphs
+          </label>
+          <textarea
+            name="socialUrls"
+            id="social-urls"
+            cols="30"
+            rows="8"
+            placeholder={
+              "Example:\nhttps://www.facebook.com/username\nhttps://www.linkedin.com/profile"
+            }
+            style={{ lineHeight: 1.6, marginTop: "1rem" }}
+            defaultValue={socials && socials.urls.join("\n")}
+          ></textarea>
+        </div>
+      </Form>
+    </section>
+  );
+}
+
 function EducationForm({
   education,
   setEducation,
@@ -108,7 +141,7 @@ function EducationForm({
   const currData = id
     ? education.schools.filter((exp) => exp.id === id)[0]
     : {};
-    
+
   return (
     <section id="edu-sectn">
       <h2>Education</h2>
@@ -381,7 +414,7 @@ function AddBtnsContr({ activeFormList, setActiveFormList }) {
         <AddBtns text="Set Summary" clickHandler={addFormHandler("summary")} />
       )}
       {!activeFormList.includes("socials") && (
-        <AddBtns text="Set Socials" clickHandler={addFormHandler("social")} />
+        <AddBtns text="Set Socials" clickHandler={addFormHandler("socials")} />
       )}
       {!activeFormList.includes("experience") && (
         <AddBtns
@@ -399,7 +432,12 @@ function AddBtnsContr({ activeFormList, setActiveFormList }) {
   );
 }
 
-function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }) {
+function SectionsListItem({
+  sectn,
+  toggleVisibility,
+  handleEditClicked,
+  states,
+}) {
   function setExpList(expData) {
     states.setExperience({ ...sectn.experience, experiences: expData });
   }
@@ -451,6 +489,7 @@ function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }
 
   const hasNoContent =
     (sectn.section === "general" && !states.general.name) ||
+    (sectn.section === "socials" && !states.socials.urls.length) ||
     (sectn.section === "summary" && !states.summary.text) ||
     (sectn.section === "education" && !states.education.schools.length) ||
     (sectn.section === "experience" && !states.experience.experiences.length) ||
@@ -488,7 +527,8 @@ function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }
           onClick={handleDelete}
         />
       </div>
-
+      
+      {/* Nested lists */}
       {sectn.section === "experience" && (
         <ReactSortable
           tag={"ul"}
@@ -572,6 +612,8 @@ function SectionsListItem({ sectn, toggleVisibility, handleEditClicked, states }
 export default function Controls({
   general,
   setGeneral,
+  socials,
+  setSocials,
   summary,
   setSummary,
   education,
@@ -730,6 +772,18 @@ export default function Controls({
                       Form={Form}
                     />
                   );
+                case "socials":
+                  return (
+                    <SocialsForm
+                      key={form}
+                      socials={socials}
+                      setSocials={(data) => {
+                        updateSectionsList("socials");
+                        setSocials(data);
+                      }}
+                      Form={Form}
+                    />
+                  );
                 case "summary":
                   return (
                     <SummaryForm
@@ -794,6 +848,13 @@ export default function Controls({
               Form={Form}
               isInActiveTab={false}
             />
+          ) : dispFormEditing.section === "socials" ? (
+            <SocialsForm
+              socials={socials}
+              setSocials={setSocials}
+              Form={Form}
+              isInActiveTab={false}
+            />
           ) : dispFormEditing.section === "summary" ? (
             <SummaryForm
               summary={summary}
@@ -847,6 +908,8 @@ export default function Controls({
                 states={{
                   general,
                   setGeneral,
+                  socials,
+                  setSocials,
                   summary,
                   setSummary,
                   experience,

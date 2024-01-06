@@ -104,7 +104,7 @@ function EducationForm({
       startDate: formData.eduStartDate
         ? new Date(formData.eduStartDate).toDateString()
         : null,
-      endDate: formData.eduEndDate
+      endDate: formData.isPresent ? "Present" : formData.eduEndDate
         ? new Date(formData.eduEndDate).toDateString()
         : null,
       url: formData.eduUrl,
@@ -187,6 +187,9 @@ function EducationForm({
         </div>
 
         <div>
+          <input type="checkbox" name="isPresent" id="is-edu-present" className="ghost-checkbox" />
+          <label htmlFor="is-edu-present" className="clickable">I&apos;m currently studying here</label>
+
           <label htmlFor="edu-edate">End Date:</label>
           <input
             type="date"
@@ -211,11 +214,11 @@ function WorkExpForm({
     const formData = Object.fromEntries(new FormData(e.target));
     const data = {
       title: formData.jobTitle,
-      startDate: formData.eduStartDate
-        ? new Date(formData.eduStartDate).toDateString()
+      startDate: formData.jobStartDate
+        ? new Date(formData.jobStartDate).toDateString()
         : null,
-      endDate: formData.eduEndDate
-        ? new Date(formData.eduEndDate).toDateString()
+      endDate: formData.isPresent ? "Present" : formData.jobEndDate
+        ? new Date(formData.jobEndDate).toDateString()
         : null,
       company: formData.compName,
       jobDescription: formData.jobDescription,
@@ -299,6 +302,9 @@ function WorkExpForm({
         </div>
 
         <div>
+          <input type="checkbox" name="isPresent" id="is-exp-present" className="ghost-checkbox" />
+          <label htmlFor="is-exp-present" className="clickable">I&apos;m currently working here</label>
+
           <label htmlFor="job-edate">End Date:</label>
           <input
             type="date"
@@ -314,6 +320,8 @@ function WorkExpForm({
             type="date"
             name="jobDescription"
             id="job-sum"
+            rows={10}
+            cols={30}
             placeholder="A brief summary about your time here"
           ></textarea>
         </div>

@@ -6,7 +6,7 @@ function PanneledDiv({ children }) {
 }
 
 function PrintButton() {
-  return (
+  return window.print && (
     <button type="button" className="clickable print-btn" onClick={print}>
       <div><Icon path={mdiPrinter}></Icon> Print</div>
     </button>

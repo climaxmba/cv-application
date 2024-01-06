@@ -59,6 +59,7 @@ form>div {
 
 label:not(.tabs-contr label) {
   letter-spacing: 0.8px;
+  color: skyblue;
 }
 
 input,
@@ -87,6 +88,39 @@ textarea {
 }
 textarea:focus-visible {
   border: 2px solid royalblue !important;
+}
+
+.ghost-checkbox {
+  display: none;
+}
+.ghost-checkbox + label {
+  margin-left: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.ghost-checkbox + label::before {
+  content: "";
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid white;
+  border-radius: 6px;
+  position: absolute;
+  left: -2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ghost-checkbox:checked + label::before {
+  content: "✔";
+  color: white;
+  background-color: royalblue;
+  border: none;
+}
+
+/* Hide end date if checkbox is checked */
+input[name="isPresent"]:checked ~ label:not(input[name="isPresent"]:checked + label),
+input[name="isPresent"]:checked ~ input {
+  display: none;
 }
 
 #addbtns-contr {
@@ -151,5 +185,16 @@ button[type="submit"]:hover {
 @media (width > 930px) {
   label[for="null-tab"] {
     display: none;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  label:not(.tabs-contr label) {
+    color: darkcyan;
+    font-weight: 500;
+  }
+
+  .ghost-checkbox + label::before {
+    border-color: black;
   }
 }

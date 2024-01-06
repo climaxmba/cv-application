@@ -1,5 +1,6 @@
 import Icon from "@mdi/react";
 import { mdiEmail, mdiPhone, mdiLinkVariant } from "@mdi/js";
+import { SocialIcon } from "react-social-icons";
 
 function GeneralSectn({ general }) {
   return (
@@ -18,7 +19,26 @@ function GeneralSectn({ general }) {
             </a>
           )}
         </div>
-        <div id="social-conrtr">LinkedIn, Facebook, GitHub</div>
+      </section>
+    )
+  );
+}
+
+function SocialsSectn({ socials }) {
+  return (
+    socials.urls.length && (
+      <section id="social-conrtr">
+        {socials.urls.map((url) => (
+          <a href={url} key={url} className="text-with-icons">
+            <SocialIcon
+              url={url}
+              bgColor="transparent"
+              fgColor="darkblue"
+              as="span"
+            />
+            {url}
+          </a>
+        ))}
       </section>
     )
   );
@@ -65,7 +85,9 @@ function ExperienceSectn({ experience }) {
         </div>
       ))}
     </section>
-  ) : "";
+  ) : (
+    ""
+  );
 }
 
 function EducationSectn({ education }) {
@@ -102,26 +124,29 @@ function EducationSectn({ education }) {
         })}
       </div>
     </section>
-  ) : "";
+  ) : (
+    ""
+  );
 }
 
 function SkillsSectn({ skill }) {
-  return (
-    skill.skills.length ? (
-      <section id="skills-sectn">
-        <h2>Skills</h2>
-        <ul id="skill-list">
-          {skill.skills.map((skillElem) => (
-            <li key={skillElem}>{skillElem}</li>
-          ))}
-        </ul>
-      </section>
-    ) : ""
+  return skill.skills.length ? (
+    <section id="skills-sectn">
+      <h2>Skills</h2>
+      <ul id="skill-list">
+        {skill.skills.map((skillElem) => (
+          <li key={skillElem}>{skillElem}</li>
+        ))}
+      </ul>
+    </section>
+  ) : (
+    ""
   );
 }
 
 export default function Display({
   general,
+  socials,
   summary,
   education,
   experience,
@@ -135,6 +160,8 @@ export default function Display({
           switch (sectionInfo.section) {
             case "general":
               return <GeneralSectn key={general.id} general={general} />;
+            case "socials":
+              return <SocialsSectn key={socials.id} socials={socials} />;
             case "summary":
               return <SummarySectn key={summary.id} summary={summary} />;
             case "education":

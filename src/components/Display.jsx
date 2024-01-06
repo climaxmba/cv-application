@@ -27,7 +27,7 @@ function GeneralSectn({ general }) {
 function SocialsSectn({ socials }) {
   return (
     socials.urls.length && (
-      <section id="social-conrtr">
+      <section id="social-contr">
         {socials.urls.map((url) => (
           <a href={url} key={url} className="text-with-icons">
             <SocialIcon

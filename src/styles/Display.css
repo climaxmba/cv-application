@@ -31,31 +31,33 @@
   justify-content: space-between;
 }
 
-#social-conrtr {
+#social-contr {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1.8rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
 
   /* Shist margin to contain social icons effects */
   margin-left: -10px;
 }
-#social-conrtr > * {
+#social-contr > * {
   align-items: center;
   gap: 0;
 }
 
 /* Force styles on social icons */
-#social-conrtr * {
+#social-contr * {
   position: unset !important;
 }
-#social-conrtr .social-icon {
+#social-contr .social-icon {
   height: 2.5rem !important;
   width: 2.5rem !important;
 }
-#social-conrtr > *:nth-child(2n) {
+#social-contr > *:nth-child(2n) {
   justify-self: end;
 }
-#social-conrtr svg {
+#social-contr svg {
   width: 100% !important;
   height: 100% !important;
 }

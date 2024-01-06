@@ -96,6 +96,10 @@ input:invalid~.validation-msg {
 }
 
 @media print {
+  html, body {
+    overflow: hidden;
+  }
+
   * {
     background-color: white !important;
   }
@@ -109,6 +113,7 @@ input:invalid~.validation-msg {
     border: none;
     padding: 0;
     margin: 0 !important;
+    page-break-after: auto;
 
     & h2 {
       margin: 0.2rem;

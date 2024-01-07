@@ -31,6 +31,27 @@ input:invalid~.validation-msg {
   gap: 0.3rem;
 }
 
+#welcome {
+  background-color: #2b2b2b;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: welcome 3s ease-in-out 1s;
+}
+#welcome .moving-icon {
+  width: 4rem;
+  animation: icon 3.5s ease-in-out 0s;
+}
+
 .panneled-div {
   display: flex;
   gap: 0.5rem;
@@ -88,6 +109,33 @@ input:invalid~.validation-msg {
 .drag-ghost {
   opacity: 0.8;
   background-color: #4169e180;
+}
+
+@keyframes welcome {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@keyframes icon {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(2rem, -4rem);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  #welcome {
+    color: black;
+    background-color: #efefef;
+  }
 }
 
 @page {

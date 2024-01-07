@@ -45,6 +45,7 @@ input:invalid~.validation-msg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   animation: welcome 3s ease-in-out 1s;
 }
 #welcome .moving-icon {

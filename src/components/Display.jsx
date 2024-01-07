@@ -25,22 +25,22 @@ function GeneralSectn({ general }) {
 }
 
 function SocialsSectn({ socials }) {
-  return (
-    socials.urls.length && (
-      <section id="social-contr">
-        {socials.urls.map((url) => (
-          <a href={url} key={url} className="text-with-icons">
-            <SocialIcon
-              url={url}
-              bgColor="transparent"
-              fgColor="darkblue"
-              as="span"
-            />
-            {url}
-          </a>
-        ))}
-      </section>
-    )
+  return socials.urls.length ? (
+    <section id="social-contr">
+      {socials.urls.map((url) => (
+        <a href={url} key={url} className="text-with-icons">
+          <SocialIcon
+            url={url}
+            bgColor="transparent"
+            fgColor="navy"
+            as="span"
+          />
+          {url}
+        </a>
+      ))}
+    </section>
+  ) : (
+    ""
   );
 }
 

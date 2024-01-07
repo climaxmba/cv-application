@@ -32,6 +32,7 @@ input#disp-tab:checked~#disp {
 #frms,
 #disp {
   display: none;
+  padding-left: 1rem;
 }
 
 .tabs-contr {

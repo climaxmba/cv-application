@@ -77,7 +77,7 @@ function SocialsForm({ socials, setSocials, Form, isInActiveTab = true }) {
       <Form onSubmit={handleSubmit} formType={isInActiveTab ? "socials" : null}>
         <div>
           <label htmlFor="social-urls">
-            Enter your social links seperated by paragraphs
+            Enter your social links seperated by paragraphs.<br />4 at most is recomended.
           </label>
           <textarea
             name="socialUrls"
@@ -322,6 +322,7 @@ function WorkExpForm({
             rows={10}
             cols={30}
             placeholder="A brief summary about your time here"
+            defaultValue={currData.jobDescription}
           ></textarea>
         </div>
       </Form>

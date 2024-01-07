@@ -1,5 +1,12 @@
 import { v1 as uuid } from "uuid";
 
+function formatDate(dateStr) {
+  if (!dateStr) return null;
+
+  const dateArr = new Date(dateStr).toDateString().split(" ");
+  return `${dateArr[1]} ${dateArr[3]}`;
+}
+
 function GeneralForm({ general, setGeneral, Form, isInActiveTab = true }) {
   function handleSubmit(e) {
     const data = Object.fromEntries(new FormData(e.target));
@@ -101,12 +108,8 @@ function EducationForm({
     const data = {
       schoolName: formData.eduName,
       course: formData.eduPrgm,
-      startDate: formData.eduStartDate
-        ? new Date(formData.eduStartDate).toDateString()
-        : null,
-      endDate: formData.isPresent ? "Present" : formData.eduEndDate
-        ? new Date(formData.eduEndDate).toDateString()
-        : null,
+      startDate: formatDate(formData.eduStartDate),
+      endDate: formData.isPresent ? "Present" : formatDate(formData.eduEndDate),
       url: formData.eduUrl,
       id: id || uuid(),
     };
@@ -214,12 +217,8 @@ function WorkExpForm({
     const formData = Object.fromEntries(new FormData(e.target));
     const data = {
       title: formData.jobTitle,
-      startDate: formData.jobStartDate
-        ? new Date(formData.jobStartDate).toDateString()
-        : null,
-      endDate: formData.isPresent ? "Present" : formData.jobEndDate
-        ? new Date(formData.jobEndDate).toDateString()
-        : null,
+      startDate: formatDate(formData.jobStartDate),
+      endDate: formData.isPresent ? "Present" : formatDate(formData.jobEndDate),
       company: formData.compName,
       jobDescription: formData.jobDescription,
       url: formData.compUrl,

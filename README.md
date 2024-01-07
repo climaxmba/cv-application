@@ -18,10 +18,10 @@ CV application using Vite + React
 
 ## 🙏 Acknowledgement
 
-- [SortableJS]().
+- [SortableJS](https://sortablejs.github.io/Sortable/).
 - [Material Design Icons - Pictogrammers](https://pictogrammers.com/library/mdi/).
-- [react-social-icons]().
+- [react-social-icons](https://react-social-icons.com/).
 
 ## 🚀 View live
 
-Click [https://github.io]() to view in your browser
+Click [https://cli-cv-application.netlify.app/](https://cli-cv-application.netlify.app/) to view in your browser

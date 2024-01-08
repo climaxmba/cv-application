@@ -19,7 +19,7 @@ const socialsData = {
 
 const summaryData = {
   id: uuid(),
-  text: "",
+  text: "A passionate Software Engineer with over 5 years of experience, building and...",
 };
 
 const educationData = {

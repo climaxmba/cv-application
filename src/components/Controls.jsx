@@ -12,7 +12,7 @@ import {
   mdiPencil,
   mdiTrashCanOutline,
 } from "@mdi/js";
-import { GeneralForm, SocialsForm, EducationForm, WorkExpForm, SummaryForm, SkillForm } from "./ControllForms";
+import { GeneralForm, SocialsForm, EducationForm, WorkExpForm, SummaryForm, SkillForm } from "./ControlForms";
 
 function ActiveForms({ children }) {
   return <div id="active-form-contr">{children}</div>;

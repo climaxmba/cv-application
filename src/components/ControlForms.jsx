@@ -77,7 +77,7 @@ function SocialsForm({ socials, setSocials, Form, isInActiveTab = true }) {
       <Form onSubmit={handleSubmit} formType={isInActiveTab ? "socials" : null}>
         <div>
           <label htmlFor="social-urls">
-            Enter your social links seperated by paragraphs.<br />4 at most is recomended.
+            Enter your social links seperated by paragraphs.
           </label>
           <textarea
             name="socialUrls"
@@ -85,7 +85,7 @@ function SocialsForm({ socials, setSocials, Form, isInActiveTab = true }) {
             cols="30"
             rows="8"
             placeholder={
-              "Example:\nhttps://www.facebook.com/username\nhttps://www.linkedin.com/profile"
+              "Example:\nhttps://www.facebook.com/username\nhttps://www.linkedin.com/profile\nIt is recommended to add 4 socials at most."
             }
             style={{ lineHeight: 1.6, marginTop: "1rem" }}
             defaultValue={socials && socials.urls.join("\n")}

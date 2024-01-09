@@ -24,4 +24,4 @@ CV application using Vite + React
 
 ## 🚀 View live
 
-Click [https://cli-cv-application.netlify.app/](https://cli-cv-application.netlify.app/) to view in your browser
+Click [https://cv-app-climaxmba.netlify.app/](https://cv-app-climaxmba.netlify.app/) to view in your browser
